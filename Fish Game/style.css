@@ -1,0 +1,30 @@
+.bold {
+  font-weight: bold;
+}
+
+.green {
+  color: green;
+}
+
+.purple {
+  color: purple;
+}
+
+.arial {
+  font-family: Arial;
+}
+
+#formal {
+  font-family: cursive;
+  text-transform: capitalize;
+}
+
+.nobul {
+  list-style: none;
+  padding-left: 0;
+}
+
+body {
+  text-align: center;
+  background-image: url("./hypnotize_bg.png");
+}
