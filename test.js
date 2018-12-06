@@ -159,31 +159,7 @@ function boxBehave() {
   }
 }
 
-//var canvas, c;
-(function init() {
-  canvas = document.getElementById("myCanvas");
-  c = canvas.getContext("2d");
-})();
-
-//main animation function
-function drawStuff() {
-  window.requestAnimationFrame(drawStuff);
-
-
-  if (!paint) {
-    c.clearRect(0, 0, 800, 800);
-  }
-
-  c.fillStyle = "blue";
-  c.fillRect(playPos.x, playPos.y, gpSize, gpSize);
-
-  if (wtfMode) {
-    c.fillStyle = "red";
-    c.fillRect(playPos.y, playPos.x, gpSize, gpSize);
-  }
-  mark();
-  boxBehave();
-
+function pMover() {
   if (keyD) {
     playPos.x += mySpeed;
   }
@@ -196,5 +172,36 @@ function drawStuff() {
   if (keyW) {
     playPos.y -= mySpeed;
   }
+}
+
+function checks() {
+  if (!paint) {
+    c.clearRect(0, 0, 800, 800);
+  }
+  if (wtfMode) {
+    c.fillStyle = "red";
+    c.fillRect(playPos.y, playPos.x, gpSize, gpSize);
+  }
+}
+
+function holder() {
+  mark();
+  boxBehave();
+  pMover();
+}
+
+//var canvas, c;
+(function init() {
+  canvas = document.getElementById("myCanvas");//Apparently in javascript defining a var in a function without var,let,const creates a global var
+  c = canvas.getContext("2d");
+})();
+
+//main animation function
+function drawStuff() {
+  window.requestAnimationFrame(drawStuff);
+  checks();
+  c.fillStyle = "blue";
+  c.fillRect(playPos.x, playPos.y, gpSize, gpSize);  
+  holder();
 }
 window.requestAnimationFrame(drawStuff);
