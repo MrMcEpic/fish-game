@@ -86,6 +86,8 @@ function onKeyUp(event) {
     case "m":
       markers = !markers;
       break;
+    default:
+      break;
   }
 }
 
@@ -113,7 +115,7 @@ function spawner() { // create enemies
 }
 
 function writer(x, y) {
-  let t = `debug: xhit`,
+  let t = `debug: hit`,
     l = `player pos: x ${playPos.x}, y ${playPos.y}`,
     k = `block pos: x ${x}, y ${y}`;
   hdebug.innerHTML = t+"<br/>"+l+"<br/>"+k;//It's faster to cache the location once
@@ -141,9 +143,10 @@ function boxBehave() {
         blocks.splice(i, 1);
         l = blocks.length;
       }
-      if (blocks[i].x + geSize - geSize / 10 >= playPos.x && blocks[i].x <= playPos.x + gpSize - gpSize / 10) { //hit detection x
-        //console.log(`xhit pc: x${playPos.x},y${playPos.y}, bc: x${blocks[i].x},y${blocks[i].y}`);//todo y hit detection
-        writer(blocks[i].x, blocks[i].y);
+      if (blocks[i].y + geSize - geSize / 10 >= playPos.y && blocks[i].y <= playPos.y + gpSize) { //hit detection 
+        if (blocks[i].x + geSize - geSize / 10 >= playPos.x && blocks[i].x <= playPos.x + gpSize) {
+          writer(blocks[i].x, blocks[i].y);
+        }
       }
     }
     catch (error) {
@@ -153,16 +156,16 @@ function boxBehave() {
 }
 
 function pMover() {
-  if (keyD) {
+  if (keyD && playPos.x < cWidth - gpSize) {
     playPos.x += mySpeed;
   }
-  if (keyS) {
+  if (keyS && playPos.y < cHeight - gpSize) {
     playPos.y += mySpeed;
   }
-  if (keyA) {
+  if (keyA && playPos.x > 0) {
     playPos.x -= mySpeed;
   }
-  if (keyW) {
+  if (keyW && playPos.y > 0) {
     playPos.y -= mySpeed;
   }
 }
@@ -192,4 +195,5 @@ function drawStuff() {
 
 function domloaded(){//once canvas is loaded, start animation
   window.requestAnimationFrame(drawStuff);
+  document.getElementById("goals").innerHTML = "Goals:<ul class='nobul ull'><li><s>random fish location</s></li><li><s>x hit detection</s></li><li><s>y hit detection</s></li><li><s>border bounds</s></li><li>random fish spawn/timing</li><li>lose condition</li></ul>";
 }
