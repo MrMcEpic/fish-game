@@ -22,8 +22,7 @@ let playPos = {
     canvas.id = "myCanvas",
     canvas.width = cWidth,
     canvas.height = cHeight,
-    canvas.style.border = "1px solid",
-    canvas.style.background = "blue",
+    canvas.style.background = "aqua",
     div = document.getElementById("canvashold");//get canvas placeholder
   div.appendChild(canvas);//put canvas in placeholder
   c = document.getElementById("myCanvas").getContext("2d");//not using var,let,const makes it global
@@ -137,7 +136,7 @@ function boxBehave() {
     l = blocks.length;//speeds code, doesn't have to constantly check length of blocks
   for (i = 0; i < l; i++) {
     try {//fixes error from undefined x and solves blinking
-      c.fillStyle = "gold";
+      c.fillStyle = "red";
       blocks[i].x = blocks[i].x - blocks[i].speed;
       c.fillRect(blocks[i].x, blocks[i].y, blocks[i].size, blocks[i].size);
       if (blocks[i].x > cWidth || blocks[i].x < 0) {
@@ -182,7 +181,7 @@ function checks() {
 }
 
 pDraw = () => {//using arrow notation a bit to get the hang of it
-  c.fillStyle = "orange";
+  c.fillStyle = "coral";
   c.fillRect(playPos.x, playPos.y, gpSize, gpSize);  //draw player
 };
 
