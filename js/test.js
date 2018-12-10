@@ -23,6 +23,7 @@ let playPos = {
     canvas.width = cWidth,
     canvas.height = cHeight,
     canvas.style.border = "1px solid",
+    canvas.style.background = "blue",
     div = document.getElementById("canvashold");//get canvas placeholder
   div.appendChild(canvas);//put canvas in placeholder
   c = document.getElementById("myCanvas").getContext("2d");//not using var,let,const makes it global
@@ -123,7 +124,7 @@ function writer(x, y) {
 
 function mark() {
   if (markers) {
-    c.fillStyle = "red";
+    c.fillStyle = "orangered";
     c.fillRect(playPos.x + gpSize - gpSize / 10, playPos.y, gpSize / 10, gpSize);
     c.fillRect(playPos.x, playPos.y, gpSize / 10, gpSize);
     c.fillRect(playPos.x, playPos.y, gpSize, gpSize / 10);
@@ -136,7 +137,7 @@ function boxBehave() {
     l = blocks.length;//speeds code, doesn't have to constantly check length of blocks
   for (i = 0; i < l; i++) {
     try {//fixes error from undefined x and solves blinking
-      c.fillStyle = "purple";
+      c.fillStyle = "gold";
       blocks[i].x = blocks[i].x - blocks[i].speed;
       c.fillRect(blocks[i].x, blocks[i].y, blocks[i].size, blocks[i].size);
       if (blocks[i].x > cWidth || blocks[i].x < 0) {
@@ -175,13 +176,13 @@ function checks() {
     c.clearRect(0, 0, cWidth, cHeight);
   }
   if (wtfMode) {
-    c.fillStyle = "red";
+    c.fillStyle = "orangered";
     c.fillRect(playPos.y, playPos.x, gpSize, gpSize);
   }
 }
 
 pDraw = () => {//using arrow notation a bit to get the hang of it
-  c.fillStyle = "blue";
+  c.fillStyle = "orange";
   c.fillRect(playPos.x, playPos.y, gpSize, gpSize);  //draw player
 };
 
