@@ -195,5 +195,5 @@ function drawStuff() {
 
 function domloaded(){//once canvas is loaded, start animation
   window.requestAnimationFrame(drawStuff);
-  document.getElementById("goals").innerHTML = "Goals:<ul class='nobul ull'><li><s>random fish location</s></li><li><s>x hit detection</s></li><li><s>y hit detection</s></li><li><s>border bounds</s></li><li>random fish spawn/timing</li><li>lose condition</li></ul>";
+  document.getElementById("goals").innerHTML = "Goals:<ul class='nobul ull'><li><s>random fish location</s></li><li><s>x hit detection</s></li><li><s>y hit detection</s></li><li><s>border bounds</s></li><li>random fish spawn/timing & size</li><li>lose condition</li><li>player growth</li></ul>";
 }
