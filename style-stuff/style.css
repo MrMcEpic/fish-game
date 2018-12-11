@@ -1,3 +1,24 @@
+#inttop {
+  color: crimson;
+  font-size: 150%;
+  border: 14px solid currentColor;
+  border-radius: 3px;
+  width: 150px;
+  margin: 0 auto;
+}
+
+#inttop a{
+  text-decoration: none;
+  color: crimson;
+}
+
+#inttop a:hover{
+  color:white;
+}
+
+#inttop:hover{
+  color: white;
+}
 
 .arial {
   font-family: Arial;
