@@ -1,14 +1,17 @@
 //--CONFIG--\\
-let playPos = {
+let player = {
   x: 400,
-  y: 400
+  y: 400,
+  size: 30
 },
   mySpeed = 3, // speed of my box
   wtfMode = false,
   paint = false,
   markers = true,
+  markers2 = false,
   geSize = 30, // global enemy size
-  gpSize = 100, // global player size
+  geMin = 5,
+  geMax = 150,
   cWidth = 800,
   cHeight = 800;
 //--END CONFIG --\\
@@ -93,8 +96,9 @@ function onKeyUp(event) {
 
 function spawner() { // create enemies
   let x, speed,
-    size = geSize,
-    y = Math.abs(Math.floor(Math.random() * (800 - size))),
+    //size = geSize,
+    size = Math.floor(Math.random() * (geMax - geMin) + geMin),
+    y = Math.abs(Math.floor(Math.random() * (cHeight - size))),
     side = Math.random(),
     zoom = Math.floor(Math.random() * 2 + 1);
 
@@ -116,7 +120,7 @@ function spawner() { // create enemies
 
 function writer(x, y) {
   let t = `debug: hit`,
-    l = `player pos: x ${playPos.x}, y ${playPos.y}`,
+    l = `player pos: x ${player.x}, y ${player.y}`,
     k = `block pos: x ${x}, y ${y}`;
   hdebug.innerHTML = t+"<br/>"+l+"<br/>"+k;//It's faster to cache the location once
 }
@@ -124,10 +128,13 @@ function writer(x, y) {
 function mark() {
   if (markers) {
     c.fillStyle = "orangered";
-    c.fillRect(playPos.x + gpSize - gpSize / 10, playPos.y, gpSize / 10, gpSize);
-    c.fillRect(playPos.x, playPos.y, gpSize / 10, gpSize);
-    c.fillRect(playPos.x, playPos.y, gpSize, gpSize / 10);
-    c.fillRect(playPos.x, playPos.y + gpSize - gpSize / 10, gpSize, gpSize / 10);
+    // c.strokeStyle = "orangered";
+    // c.rect(player.x, player.y, player.size, player.size);
+    // c.stroke();
+    c.fillRect(player.x + player.size - player.size / 10, player.y, player.size / 10, player.size);
+    c.fillRect(player.x, player.y, player.size / 10, player.size);
+    c.fillRect(player.x, player.y, player.size, player.size / 10);
+    c.fillRect(player.x, player.y + player.size - player.size / 10, player.size, player.size / 10);
   }
 }
 
@@ -135,38 +142,66 @@ function boxBehave() {
   let i,
     l = blocks.length;//speeds code, doesn't have to constantly check length of blocks
   for (i = 0; i < l; i++) {
-    try {//fixes error from undefined x and solves blinking
+    //try {//fixes error from undefined x and solves blinking
+      let despawn = false,
+        box = blocks[i];// short hand
+      box.x = box.x - box.speed;
       c.fillStyle = "red";
-      blocks[i].x = blocks[i].x - blocks[i].speed;
-      c.fillRect(blocks[i].x, blocks[i].y, blocks[i].size, blocks[i].size);
-      if (blocks[i].x > cWidth || blocks[i].x < 0) {
-        blocks.splice(i, 1);
-        l = blocks.length;
+      c.fillRect(box.x, box.y, box.size, box.size); //this part updates/draws boxes
+      if (box.x > cWidth || box.x + box.size < 0) {
+        despawn = true;
       }
-      if (blocks[i].y + geSize - geSize / 10 >= playPos.y && blocks[i].y <= playPos.y + gpSize) { //hit detection 
-        if (blocks[i].x + geSize - geSize / 10 >= playPos.x && blocks[i].x <= playPos.x + gpSize) {
-          writer(blocks[i].x, blocks[i].y);
+      if (box.y + box.size - box.size / 10 >= player.y && box.y <= player.y + player.size) { //hit detection 
+        if (box.x + box.size - box.size / 10 >= player.x && box.x <= player.x + player.size) {
+          writer(box.x, box.y);
+          despawn = true;
         }
       }
-    }
-    catch (error) {
-      continue;
-    }
+      if (despawn) {
+        blocks.splice(i, 1);
+        l = blocks.length;//updates list length to prevent errors
+      } else {
+        blocks[i] = box; // short hand update
+      }
+    //}
+    //catch (error) {
+      //continue;
+    //}
   }
+//   blocks.forEach((box, i, _) => { //box = box object from list, i = box index, _ = blocks list
+//     let despawn = false;
+//     box.x = box.x - box.speed;
+//     c.fillStyle = "red";
+//     c.fillRect(box.x, box.y, box.size, box.size);
+//     if (box.x > cWidth || box.x < 0) {
+//       despawn = true;
+//     }
+//     if (box.y + box.size - box.size / 10 >= player.y && box.y <= player.y + player.size) {
+//       if (box.x + box.size - box.size / 10 >= player.x && box.x <= player.x + player.size) {
+//         writer(box.x, box.y);
+//         despawn = true;
+//       }
+//     }
+//     if (!despawn) {
+//       _[i] = box;
+//     } else {
+//       _.splice(i, 1);
+//     }
+//   });
 }
 
 function pMover() {
-  if (keyD && playPos.x < cWidth - gpSize) {
-    playPos.x += mySpeed;
+  if (keyD && player.x < cWidth - player.size) {
+    player.x += mySpeed;
   }
-  if (keyS && playPos.y < cHeight - gpSize) {
-    playPos.y += mySpeed;
+  if (keyS && player.y < cHeight - player.size) {
+    player.y += mySpeed;
   }
-  if (keyA && playPos.x > 0) {
-    playPos.x -= mySpeed;
+  if (keyA && player.x > 0) {
+    player.x -= mySpeed;
   }
-  if (keyW && playPos.y > 0) {
-    playPos.y -= mySpeed;
+  if (keyW && player.y > 0) {
+    player.y -= mySpeed;
   }
 }
 
@@ -176,13 +211,13 @@ function checks() {
   }
   if (wtfMode) {
     c.fillStyle = "orangered";
-    c.fillRect(playPos.y, playPos.x, gpSize, gpSize);
+    c.fillRect(player.y, player.x, player.size, player.size);
   }
 }
 
 pDraw = () => {//using arrow notation a bit to get the hang of it
   c.fillStyle = "coral";
-  c.fillRect(playPos.x, playPos.y, gpSize, gpSize);  //draw player
+  c.fillRect(player.x, player.y, player.size, player.size);  //draw player
 };
 
 loadOrder = () => {checks(); pDraw(); mark(); boxBehave(); pMover();};
@@ -194,6 +229,6 @@ function drawStuff() {
 }
 
 function domloaded(){//once canvas is loaded, start animation
-  window.requestAnimationFrame(drawStuff);
-  document.getElementById("goals").innerHTML = "Goals:<ul class='nobul ull'><li><s>random fish location</s></li><li><s>x hit detection</s></li><li><s>y hit detection</s></li><li><s>border bounds</s></li><li>random fish spawn/timing & size</li><li>lose condition</li><li>player growth</li></ul>";
+  drawStuff();
+  document.getElementById("goals").innerHTML = "Goals:<ul class='nobul ull'><li><s>random fish location</s></li><li><s>x hit detection</s></li><li><s>y hit detection</s></li><li><s>border bounds</s></li><li>random fish spawn/timing & <s>size</s></li><li>lose condition</li><li>player growth</li></ul>";
 }
