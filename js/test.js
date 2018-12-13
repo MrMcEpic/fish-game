@@ -16,9 +16,11 @@ let player = {
   cHeight = 800;
 //--END CONFIG --\\
 
-(function preinit() {//function autocalls itself
-  var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+(preinit= () => {//function autocalls itself
+  var requestAnimationFrame = window.requestAnimationFrame ||
+                              window.mozRequestAnimationFrame ||
+                              window.webkitRequestAnimationFrame ||
+                              window.msRequestAnimationFrame;
   window.requestAnimationFrame = requestAnimationFrame;
   document.getElementById("info").innerHTML = "WASD To move, X to spawn box, R for wtfmode, P to paint, M for markers";
   canvas = document.createElement('canvas'),//create canvas
@@ -138,57 +140,40 @@ function mark() {
   }
 }
 
+despawn = (i, arr) => {
+  arr.splice(i, 1);
+  return arr.length;
+};
+
 function boxBehave() {
   let i,
     l = blocks.length;//speeds code, doesn't have to constantly check length of blocks
-  for (i = 0; i < l; i++) {
-    //try {//fixes error from undefined x and solves blinking
-      let despawn = false,
-        box = blocks[i];// short hand
-      box.x = box.x - box.speed;
-      c.fillStyle = "red";
-      c.fillRect(box.x, box.y, box.size, box.size); //this part updates/draws boxes
-      if (box.x > cWidth || box.x + box.size < 0) {
-        despawn = true;
+  for (i = 0; i < l; i++) {//don't use in because length changes
+    let box = blocks[i];// short hand
+    box.x = box.x - box.speed;
+    if (box.x > cWidth || box.x + box.size < 0) {
+      l = despawn(i, blocks);
+      continue;
+    }
+    if (box.y + box.size - box.size / 10 >= player.y && box.y <= player.y + player.size) { //hit detection 
+      if (box.x + box.size - box.size / 10 >= player.x && box.x <= player.x + player.size) {
+        writer(box.x, box.y);
+        l = despawn(i, blocks);
+        continue;
       }
-      if (box.y + box.size - box.size / 10 >= player.y && box.y <= player.y + player.size) { //hit detection 
-        if (box.x + box.size - box.size / 10 >= player.x && box.x <= player.x + player.size) {
-          writer(box.x, box.y);
-          despawn = true;
-        }
-      }
-      if (despawn) {
-        blocks.splice(i, 1);
-        l = blocks.length;//updates list length to prevent errors
-      } else {
-        blocks[i] = box; // short hand update
-      }
-    //}
-    //catch (error) {
-      //continue;
-    //}
+    }
+    blocks[i] = box;
   }
-//   blocks.forEach((box, i, _) => { //box = box object from list, i = box index, _ = blocks list
-//     let despawn = false;
-//     box.x = box.x - box.speed;
-//     c.fillStyle = "red";
-//     c.fillRect(box.x, box.y, box.size, box.size);
-//     if (box.x > cWidth || box.x < 0) {
-//       despawn = true;
-//     }
-//     if (box.y + box.size - box.size / 10 >= player.y && box.y <= player.y + player.size) {
-//       if (box.x + box.size - box.size / 10 >= player.x && box.x <= player.x + player.size) {
-//         writer(box.x, box.y);
-//         despawn = true;
-//       }
-//     }
-//     if (!despawn) {
-//       _[i] = box;
-//     } else {
-//       _.splice(i, 1);
-//     }
-//   });
 }
+
+boxDraw = () => { //this solves blinking bug
+  let i;
+  for (i in blocks) {
+    let box = blocks[i];
+    c.fillStyle = "red";
+    c.fillRect(box.x, box.y, box.size, box.size); //this part updates/draws boxes
+  }
+};
 
 function pMover() {
   if (keyD && player.x < cWidth - player.size) {
@@ -220,7 +205,7 @@ pDraw = () => {//using arrow notation a bit to get the hang of it
   c.fillRect(player.x, player.y, player.size, player.size);  //draw player
 };
 
-loadOrder = () => {checks(); pDraw(); mark(); boxBehave(); pMover();};
+loadOrder = () => { checks(); pDraw(); mark(); boxBehave(); boxDraw(); pMover();};
 
 //main animation function
 function drawStuff() {
