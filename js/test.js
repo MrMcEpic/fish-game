@@ -3,9 +3,10 @@ let player = {
 		x: 400,
 		y: 400,
 		size: 30,
-		alive: true
+		alive: true,
+		speed: 3
 	},
-	mySpeed = 3, // speed of my box
+	limit = 10,
 	wtfMode = false,
 	paint = false,
 	markers = true,
@@ -23,7 +24,7 @@ let player = {
 								window.webkitRequestAnimationFrame ||
 								window.msRequestAnimationFrame;
 	window.requestAnimationFrame = requestAnimationFrame;
-	document.getElementById("info").innerHTML = "WASD To move, X to spawn box, R for wtfmode, P to paint, M for markers";
+	document.getElementById("info").innerHTML = "WASD To move, R for wtfmode, P to paint, M for markers";
 	canvas = document.createElement('canvas'), //create canvas
 		canvas.id = "myCanvas",
 		canvas.width = cWidth,
@@ -80,9 +81,9 @@ function onKeyUp(event) {
 		case "w":
 			keyW = false;
 			break;
-		case "x":
-			setTimeout(spawner, Math.floor(Math.random() * (10000-1000)+1000));
-			break;
+		// case "x":
+		// 	setTimeout(spawner, Math.floor(Math.random() * (10000-1000)+1000));
+		// 	break;
 		case "r":
 			wtfMode = !wtfMode;
 			break;
@@ -97,13 +98,21 @@ function onKeyUp(event) {
 	}
 }
 
+function randRange(min, max, _floor) {
+	if (_floor) {
+		return Math.floor(Math.random() * (max - min) + min);
+	} else {
+		return Math.random() * (max - min) + min;
+	}
+}
+
 function spawner() { // create enemies
 	let x,
 		speed,
-		size = Math.floor(Math.random() * (geMax - geMin) + geMin),
-		y = Math.abs(Math.floor(Math.random() * (cHeight - size))),
+		size = randRange(geMin, geMax, true),
+		y = Math.abs(randRange(0, cHeight - size, false)),
 		side = Math.random(),
-		zoom = Math.floor(Math.random() * 2 + 1);
+		zoom = Math.random() * 2 + 1;
 
 	if (side >= 0.499999) {
 		x = cWidth + 70;
@@ -112,7 +121,7 @@ function spawner() { // create enemies
 		x = 0 - 160;
 		speed = -zoom;
 	}
-	if (blocks.length < 10) {
+	if (blocks.length < limit) {
 		blocks.push({
 			size: size,
 			x: x,
@@ -122,19 +131,14 @@ function spawner() { // create enemies
 	}
 }
 
-function writer(x, y) {
-	let t = `debug: hit`,
-		l = `player pos: x ${player.x}, y ${player.y}`,
-		k = `block pos: x ${x}, y ${y}`,
-		o = `size: ${player.size}`;
-	hdebug.innerHTML = t + "<br/>" + l + "<br/>" + k + "<br/>" + o; //It's faster to cache the location once
+function writer() {
+	c.fillStyle = "Black";
+	c.font = "30px Roboto";
+	c.fillText(o, 10, 40);
 }
 
 function mark() {
 	if (markers) {
-		// c.strokeStyle = "orangered";
-		// c.rect(player.x, player.y, player.size, player.size);
-		// c.stroke();
 		c.fillStyle = "orangered";
 		c.fillRect(player.x + player.size - player.size / 10, player.y, player.size / 10, player.size);
 		c.fillRect(player.x, player.y, player.size / 10, player.size);
@@ -144,11 +148,18 @@ function mark() {
 }
 
 pHit = (box, i) => {
-	let pSize = player.size,
-		bSize = box.size;
-	if (pSize > bSize) {
+	if (player.size > box.size) {
 		despawn(i, blocks);
-		player.size += bSize / 10;
+		player.size += box.size / 10;
+		if (player.size >= 70 && limit < 15) {
+			limit = 15;
+		} else if (player.size >= 60 && limit < 14) {
+			limit = 14;
+		} else if (player.size >= 50 && limit < 13) {
+			limit = 13;
+		} else if (player.size >= 40 && limit < 12) {
+			limit = 12;
+		}
 	} else {
 		player.alive = false;
 	}
@@ -169,9 +180,8 @@ function boxBehave() {
 			l = despawn(i, blocks);
 			continue;
 		}
-		if (box.y + box.size - box.size / 10 >= player.y && box.y <= player.y + player.size) { //hit detection 
-			if (box.x + box.size - box.size / 10 >= player.x && box.x <= player.x + player.size) {
-				writer(box.x, box.y);
+		if (box.y + box.size >= player.y && box.y <= player.y + player.size) { //hit detection 
+			if (box.x + box.size >= player.x && box.x <= player.x + player.size) {
 				pHit(box, i);
 				continue;
 			}
@@ -191,16 +201,16 @@ boxDraw = () => { //this solves blinking bug
 
 function pMover() {
 	if (keyD && player.x < cWidth - player.size) {
-		player.x += mySpeed;
+		player.x += player.speed;
 	}
 	if (keyS && player.y < cHeight - player.size) {
-		player.y += mySpeed;
+		player.y += player.speed;
 	}
 	if (keyA && player.x > 0) {
-		player.x -= mySpeed;
+		player.x -= player.speed;
 	}
 	if (keyW && player.y > 0) {
-		player.y -= mySpeed;
+		player.y -= player.speed;
 	}
 }
 
@@ -220,8 +230,8 @@ pDraw = () => { //using arrow notation a bit to get the hang of it
 };
 
 spawnTime = () => {
-	if (blocks.length < 10) {
-		setTimeout(spawner, Math.floor(Math.random() * (10000 - 1000) + 1000)); // temp
+	if (blocks.length < limit) {
+		setTimeout(spawner, randRange(1000,10000,false)); // temp?
 	}
 };
 
@@ -234,6 +244,7 @@ loadOrder = () => {
 		boxBehave();
 		boxDraw();
 		pMover();
+		writer();
 	} else {
 		//draw lose condition
 	}
@@ -247,5 +258,5 @@ function drawStuff() {
 
 function domloaded() { //once canvas is loaded, start animation
 	drawStuff();
-	document.getElementById("goals").innerHTML = "Goals:<ul class='nobul ull'><li><s>random fish location</s></li><li><s>x hit detection</s></li><li><s>y hit detection</s></li><li><s>border bounds</s></li><li><s>random fish spawn/timing & size</s></li><li>lose condition (semi)</li><li><s>player growth</s></li></ul>";
+	document.getElementById("goals").innerHTML = "Goals:<ul class='nobul ull'><li><s>random fish location</s></li><li><s>x hit detection</s></li><li><s>y hit detection</s></li><li><s>border bounds</s></li><li><s>random fish spawn/timing & size</s></li><li>lose condition (semi)</li><li><s>player growth</s></li><li>win condition</li></ul>";
 }
