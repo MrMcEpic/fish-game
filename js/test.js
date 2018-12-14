@@ -219,14 +219,18 @@ pDraw = () => { //using arrow notation a bit to get the hang of it
 	c.fillRect(player.x, player.y, player.size, player.size); //draw player
 };
 
+spawnTime = () => {
+	if (blocks.length < 10) {
+		setTimeout(spawner, Math.floor(Math.random() * (10000 - 1000) + 1000)); // temp
+	}
+};
+
 loadOrder = () => {
 	if (player.alive) {
 		checks();
 		pDraw();
 		mark();
-		if (blocks.length < 10) {
-			setTimeout(spawner, Math.floor(Math.random() * (10000 - 1000) + 1000)); // temp
-		}
+		spawnTime();
 		boxBehave();
 		boxDraw();
 		pMover();
