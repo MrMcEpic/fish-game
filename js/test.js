@@ -1,12 +1,14 @@
 
 (config = () => {
 //--CONFIG--\\
+	pSpeedDe = 2;
+	pSprintDe = 4;
 	player = {
 		x: 400,
 		y: 400,
 		size: 30,
 		alive: true,
-		speed: 3
+		speed: 2
 	},
 		limit = 10,
 		wtfMode = false,
@@ -20,6 +22,8 @@
 		keyA = false,
 		keyS = false,
 		keyD = false,
+		sprint = false,
+		sprintbar = 100,
 		blocks = [];
 //--END CONFIG --\\
 })();
@@ -32,7 +36,7 @@ var fix = 0;
 		window.webkitRequestAnimationFrame ||
 		window.msRequestAnimationFrame;
 	window.requestAnimationFrame = requestAnimationFrame;
-	document.getElementById("info").innerHTML = "WASD To move, H for wtfmode, P to paint, M for markers";
+	document.getElementById("info").innerHTML = "WASD or arrow keys to move, Shift to sprint, H for wtfmode, P to paint, M for markers";
 	if (fix === 0) {
 		canvas = document.createElement('canvas'); //create canvas
 	}
@@ -56,51 +60,70 @@ document.addEventListener("DOMContentLoaded", domloaded, false);
 //----\\
 
 function onKeyDown(event) {
-	switch (event.key) {
-		case "d":
+	if([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) { //disables arrow key scrolling
+        event.preventDefault();
+    }
+	switch (event.which) {
+		case 39:
+		case 68:
 			keyD = true;
 			break;
-		case "s":
+		case 40:
+		case 83:
 			keyS = true;
 			break;
-		case "a":
+		case 37:
+		case 65:
 			keyA = true;
 			break;
-		case "w":
+		case 38:
+		case 87:
 			keyW = true;
+			break;
+		case 16:
+			if (!sprintDis) {
+				sprint = true;
+			}
 			break;
 	}
 }
 
 function onKeyUp(event) {
-	switch (event.key) {
-		case "d":
+	switch (event.which) {
+		case 39:
+		case 68: //d
 			keyD = false;
 			break;
-		case "s":
+		case 40:
+		case 83: //s
 			keyS = false;
 			break;
-		case "a":
+		case 37:
+		case 65: //a
 			keyA = false;
 			break;
-		case "w":
+		case 38:
+		case 87: //w
 			keyW = false;
 			break;
-		case "h":
+		case 72: //h
 			wtfMode = !wtfMode;
 			break;
-		case "p":
+		case 80: //p
 			paint = !paint;
 			break;
-		case "m":
+		case 77: //m
 			markers = !markers;
 			break;
-		case "r":
+		case 82: //r
 			if (!player.alive) {
 				config();
 				loadOrder();
 				preinit();
 			}
+			break;
+		case 16:
+			sprint = false;
 			break;
 		default:
 			break;
@@ -144,6 +167,7 @@ function writer() {
 	c.fillStyle = "Black";
 	c.font = "30px Roboto";
 	c.fillText(_size, 10, 40);
+	c.fillText(`Sprint: ${Math.floor(sprintbar)}`, 10, 70);
 }
 
 function mark() {
@@ -158,7 +182,7 @@ function mark() {
 
 pHit = (box, i, arr) => {
 	if (player.size > box.size) {
-		despawn(i, blocks);
+		despawn(i, arr);
 		player.size += box.size / 10;
 		if (player.size >= 70 && limit < 15) {
 			limit = 15;
@@ -210,6 +234,24 @@ boxDraw = () => { //this solves blinking bug
 };
 
 function pMover() {
+
+	if (sprintbar <= 0) {
+		sprintDis = true;
+		sprint = false;
+	} else if (sprintbar >= 50) {
+		sprintDis = false;
+	}
+
+	if (!sprint) {
+		player.speed = pSpeedDe;
+		if (sprintbar < 100) {
+			sprintbar += 0.1;
+		}
+	} else if (sprint) {
+		player.speed = pSprintDe;
+		sprintbar -= 0.5;
+	}
+
 	if (keyD && player.x < cWidth - player.size) {
 		player.x += player.speed;
 	}
@@ -285,7 +327,7 @@ function domloaded() { //once canvas is loaded, start animation
 	<li>lose condition (semi)</li>\
 	<li><s>player growth</s></li>\
 	<li>win condition</li>\
-	<li>sprint</li>\
+	<li><s>sprint</s></li>\
 	<li>hard mode col spawn</li>\
 	</ul>";
 }
