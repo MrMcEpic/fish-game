@@ -2,13 +2,13 @@
 (config = () => {
 //--CONFIG--\\
 	pSpeedDe = 2;
-	pSprintDe = 4;
+	pSprintDe = 6;
 	player = {
 		x: 400,
 		y: 400,
 		size: 30,
 		alive: true,
-		speed: 2
+		speed: pSpeedDe
 	},
 		limit = 10,
 		wtfMode = false,
@@ -233,25 +233,29 @@ boxDraw = () => { //this solves blinking bug
 	}
 };
 
-function pMover() {
-
+sprintLogic = () => {
 	if (sprintbar <= 0) {
-		sprintDis = true;
 		sprint = false;
-	} else if (sprintbar >= 50) {
+	}
+
+	if (sprintbar < 100) {
+		sprintDis = true;
+	} else if (sprintbar >= 100) {
 		sprintDis = false;
 	}
 
 	if (!sprint) {
 		player.speed = pSpeedDe;
 		if (sprintbar < 100) {
-			sprintbar += 0.1;
+			sprintbar += 0.3;
 		}
 	} else if (sprint) {
 		player.speed = pSprintDe;
-		sprintbar -= 0.5;
+		sprintbar -= 1;
 	}
+};
 
+function pMover() {
 	if (keyD && player.x < cWidth - player.size) {
 		player.x += player.speed;
 	}
@@ -296,6 +300,7 @@ loadOrder = () => {
 		spawnTime();
 		boxBehave();
 		boxDraw();
+		sprintLogic();
 		pMover();
 		writer();
 	} else {
