@@ -132,6 +132,7 @@ function spawner() { // create enemies
 }
 
 function writer() {
+	let o = `Size: ${Math.floor(player.size)}`;
 	c.fillStyle = "Black";
 	c.font = "30px Roboto";
 	c.fillText(o, 10, 40);
