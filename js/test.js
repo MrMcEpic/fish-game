@@ -12,8 +12,6 @@
 		wtfMode = false,
 		paint = false,
 		markers = true,
-		markers2 = false,
-		geSize = 30, // global enemy size
 		geMin = 5,
 		geMax = 150,
 		cWidth = 800,
@@ -98,9 +96,11 @@ function onKeyUp(event) {
 			markers = !markers;
 			break;
 		case "r":
-			config();
-			preinit();
-			domloaded();
+			if (!player.alive) {
+				config();
+				loadOrder();
+				preinit();
+			}
 			break;
 		default:
 			break;
@@ -247,6 +247,7 @@ spawnTime = () => {
 
 loadOrder = () => {
 	if (player.alive) {
+		window.requestAnimationFrame(drawStuff);
 		checks();
 		pDraw();
 		mark();
@@ -268,9 +269,6 @@ loadOrder = () => {
 
 //main animation function
 function drawStuff() {
-	if (player.alive) {
-		window.requestAnimationFrame(drawStuff);
-	}
 	loadOrder();
 }
 
