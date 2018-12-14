@@ -1,53 +1,60 @@
+
+(config = () => {
 //--CONFIG--\\
-let player = {
+	player = {
 		x: 400,
 		y: 400,
 		size: 30,
 		alive: true,
 		speed: 3
 	},
-	limit = 10,
-	wtfMode = false,
-	paint = false,
-	markers = true,
-	markers2 = false,
-	geSize = 30, // global enemy size
-	geMin = 5,
-	geMax = 150,
-	cWidth = 800,
-	cHeight = 800;
+		limit = 10,
+		wtfMode = false,
+		paint = false,
+		markers = true,
+		markers2 = false,
+		geSize = 30, // global enemy size
+		geMin = 5,
+		geMax = 150,
+		cWidth = 800,
+		cHeight = 800,
+		keyW = false,
+		keyA = false,
+		keyS = false,
+		keyD = false,
+		blocks = [];
 //--END CONFIG --\\
+})();
+var fix = 0;
+
 
 (preinit = () => { //function autocalls itself
 	var requestAnimationFrame = window.requestAnimationFrame ||
-								window.mozRequestAnimationFrame ||
-								window.webkitRequestAnimationFrame ||
-								window.msRequestAnimationFrame;
+		window.mozRequestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.msRequestAnimationFrame;
 	window.requestAnimationFrame = requestAnimationFrame;
-	document.getElementById("info").innerHTML = "WASD To move, R for wtfmode, P to paint, M for markers";
-	canvas = document.createElement('canvas'), //create canvas
+	document.getElementById("info").innerHTML = "WASD To move, H for wtfmode, P to paint, M for markers";
+	if (fix === 0) {
+		canvas = document.createElement('canvas'); //create canvas
+	}
 		canvas.id = "myCanvas",
 		canvas.width = cWidth,
 		canvas.height = cHeight,
 		canvas.style.background = "aqua",
 		div = document.getElementById("canvashold"); //get canvas placeholder
-	div.appendChild(canvas); //put canvas in placeholder
+	if (fix === 0){
+		div.appendChild(canvas); //put canvas in placeholder
+	}
 	c = document.getElementById("myCanvas").getContext("2d"); //not using var,let,const makes it global
 	hdebug = document.getElementById("hitdebug"); //speeds code to not constantly grab from dom
+	fix++;
 })();
 
 //--event listeners--\\
 window.addEventListener("keydown", onKeyDown, false);
 window.addEventListener("keyup", onKeyUp, false);
 document.addEventListener("DOMContentLoaded", domloaded, false);
-//----\\
-
-//--needed--\\
-let keyW = false,
-	keyA = false,
-	keyS = false,
-	keyD = false,
-	blocks = [];
 //----\\
 
 function onKeyDown(event) {
@@ -81,10 +88,7 @@ function onKeyUp(event) {
 		case "w":
 			keyW = false;
 			break;
-		// case "x":
-		// 	setTimeout(spawner, Math.floor(Math.random() * (10000-1000)+1000));
-		// 	break;
-		case "r":
+		case "h":
 			wtfMode = !wtfMode;
 			break;
 		case "p":
@@ -92,6 +96,11 @@ function onKeyUp(event) {
 			break;
 		case "m":
 			markers = !markers;
+			break;
+		case "r":
+			config();
+			preinit();
+			domloaded();
 			break;
 		default:
 			break;
@@ -112,8 +121,7 @@ function spawner() { // create enemies
 		size = randRange(geMin, geMax, true),
 		y = Math.abs(randRange(0, cHeight - size, false)),
 		side = Math.random(),
-		zoom = Math.random() * 2 + 1;
-
+		zoom = randRange(0.5, 4.0, false);
 	if (side >= 0.499999) {
 		x = cWidth + 70;
 		speed = zoom;
@@ -132,10 +140,10 @@ function spawner() { // create enemies
 }
 
 function writer() {
-	let o = `Size: ${Math.floor(player.size)}`;
+	let _size = `Size: ${Math.floor(player.size)}`;
 	c.fillStyle = "Black";
 	c.font = "30px Roboto";
-	c.fillText(o, 10, 40);
+	c.fillText(_size, 10, 40);
 }
 
 function mark() {
@@ -148,7 +156,7 @@ function mark() {
 	}
 }
 
-pHit = (box, i) => {
+pHit = (box, i, arr) => {
 	if (player.size > box.size) {
 		despawn(i, blocks);
 		player.size += box.size / 10;
@@ -164,6 +172,7 @@ pHit = (box, i) => {
 	} else {
 		player.alive = false;
 	}
+	return arr.length;
 };
 
 despawn = (i, arr) => {
@@ -183,7 +192,7 @@ function boxBehave() {
 		}
 		if (box.y + box.size >= player.y && box.y <= player.y + player.size) { //hit detection 
 			if (box.x + box.size >= player.x && box.x <= player.x + player.size) {
-				pHit(box, i);
+				l = pHit(box, i, blocks);
 				continue;
 			}
 		}
@@ -232,7 +241,7 @@ pDraw = () => { //using arrow notation a bit to get the hang of it
 
 spawnTime = () => {
 	if (blocks.length < limit) {
-		setTimeout(spawner, randRange(1000,10000,false)); // temp?
+		setTimeout(spawner, randRange(1000, 10000, false)); // temp?
 	}
 };
 
@@ -248,16 +257,37 @@ loadOrder = () => {
 		writer();
 	} else {
 		//draw lose condition
+		c.fillStyle = "red";
+		c.textAlign = "center";
+		c.font = "60px Roboto";
+		c.fillText("You Lose!", cWidth / 2, cHeight / 2);
+		c.font = "20px Roboto";
+		c.fillText("Press R to play again!", cWidth / 2, cHeight / 2 + 100);
 	}
 };
 
 //main animation function
 function drawStuff() {
-	window.requestAnimationFrame(drawStuff);
+	if (player.alive) {
+		window.requestAnimationFrame(drawStuff);
+	}
 	loadOrder();
 }
 
 function domloaded() { //once canvas is loaded, start animation
 	drawStuff();
-	document.getElementById("goals").innerHTML = "Goals:<ul class='nobul ull'><li><s>random fish location</s></li><li><s>x hit detection</s></li><li><s>y hit detection</s></li><li><s>border bounds</s></li><li><s>random fish spawn/timing & size</s></li><li>lose condition (semi)</li><li><s>player growth</s></li><li>win condition</li></ul>";
+	document.getElementById("goals").innerHTML = 
+	"Goals:\
+	<ul class='nobul ull'>\
+	<li><s>random fish location</s></li>\
+	<li><s>x hit detection</s></li>\
+	<li><s>y hit detection</s></li>\
+	<li><s>border bounds</s></li>\
+	<li><s>random fish spawn/timing & size</s></li>\
+	<li>lose condition (semi)</li>\
+	<li><s>player growth</s></li>\
+	<li>win condition</li>\
+	<li>sprint</li>\
+	<li>hard mode col spawn</li>\
+	</ul>";
 }
