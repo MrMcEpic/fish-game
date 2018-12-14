@@ -1,7 +1,7 @@
 
 (config = () => {
 //--CONFIG--\\
-	pSpeedDe = 2;
+	pSpeedDe = 2,
 	pSprintDe = 6;
 	player = {
 		x: 400,
@@ -27,8 +27,6 @@
 		blocks = [];
 //--END CONFIG --\\
 })();
-var fix = 0;
-
 
 (preinit = () => { //function autocalls itself
 	var requestAnimationFrame = window.requestAnimationFrame ||
@@ -37,20 +35,15 @@ var fix = 0;
 		window.msRequestAnimationFrame;
 	window.requestAnimationFrame = requestAnimationFrame;
 	document.getElementById("info").innerHTML = "WASD or arrow keys to move, Shift to sprint, H for wtfmode, P to paint, M for markers";
-	if (fix === 0) {
-		canvas = document.createElement('canvas'); //create canvas
-	}
+	canvas = document.createElement('canvas'), //create canvas
 		canvas.id = "myCanvas",
 		canvas.width = cWidth,
 		canvas.height = cHeight,
 		canvas.style.background = "aqua",
 		div = document.getElementById("canvashold"); //get canvas placeholder
-	if (fix === 0){
 		div.appendChild(canvas); //put canvas in placeholder
-	}
 	c = document.getElementById("myCanvas").getContext("2d"); //not using var,let,const makes it global
 	hdebug = document.getElementById("hitdebug"); //speeds code to not constantly grab from dom
-	fix++;
 })();
 
 //--event listeners--\\
@@ -84,6 +77,8 @@ function onKeyDown(event) {
 			if (!sprintDis) {
 				sprint = true;
 			}
+			break;
+		default:
 			break;
 	}
 }
@@ -119,7 +114,7 @@ function onKeyUp(event) {
 			if (!player.alive) {
 				config();
 				loadOrder();
-				preinit();
+				//preinit();
 			}
 			break;
 		case 16:
@@ -164,6 +159,7 @@ function spawner() { // create enemies
 
 function writer() {
 	let _size = `Size: ${Math.floor(player.size)}`;
+	c.textAlign = "left";
 	c.fillStyle = "Black";
 	c.font = "30px Roboto";
 	c.fillText(_size, 10, 40);
@@ -280,7 +276,7 @@ function checks() {
 	}
 }
 
-pDraw = () => { //using arrow notation a bit to get the hang of it
+pDraw = () => {
 	c.fillStyle = "coral";
 	c.fillRect(player.x, player.y, player.size, player.size); //draw player
 };
@@ -289,6 +285,17 @@ spawnTime = () => {
 	if (blocks.length < limit) {
 		setTimeout(spawner, randRange(1000, 10000, false)); // temp?
 	}
+};
+
+lose = () => {
+	c.fillStyle = "red";
+	c.textAlign = "center";
+	c.font = "60px Roboto";
+	c.fillText("You Lose!", cWidth / 2, cHeight / 2);
+	c.strokeText("You Lose!", cWidth / 2, cHeight / 2);
+	c.font = "20px Roboto";
+	c.fillText("Press R to play again!", cWidth / 2, cHeight / 2 + 100);
+	c.strokeText("Press R to play again!", cWidth / 2, cHeight / 2 + 100);
 };
 
 loadOrder = () => {
@@ -304,17 +311,10 @@ loadOrder = () => {
 		pMover();
 		writer();
 	} else {
-		//draw lose condition
-		c.fillStyle = "red";
-		c.textAlign = "center";
-		c.font = "60px Roboto";
-		c.fillText("You Lose!", cWidth / 2, cHeight / 2);
-		c.font = "20px Roboto";
-		c.fillText("Press R to play again!", cWidth / 2, cHeight / 2 + 100);
+		lose();
 	}
 };
 
-//main animation function
 function drawStuff() {
 	loadOrder();
 }
