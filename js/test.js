@@ -138,7 +138,7 @@ function mark() {
     c.fillRect(player.x, player.y, player.size, player.size / 10);
     c.fillRect(player.x, player.y + player.size - player.size / 10, player.size, player.size / 10);
   }
-}
+}//
 
 despawn = (i, arr) => {
   arr.splice(i, 1);
