@@ -6,7 +6,7 @@ let config;
 	player = {
 		x: 400,
 		y: 400,
-		size: 300,
+		size: 30,
 		alive: true,
 		speed: pSpeedDe
 	},
