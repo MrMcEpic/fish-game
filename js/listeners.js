@@ -87,10 +87,11 @@ function domloaded() { //once canvas is loaded, start animation
 	<li><s>y hit detection</s></li>\
 	<li><s>border bounds</s></li>\
 	<li><s>random fish spawn/timing & size</s></li>\
-	<li>lose condition (semi)</li>\
+	<li><s>lose condition</s> (semi)</li>\
 	<li><s>player growth</s></li>\
-	<li>win condition</li>\
+	<li><s>win condition</s> (semi)</li>\
 	<li><s>sprint</s></li>\
 	<li>hard mode col spawn</li>\
+	<li>sprites</li>\
 	</ul>";
 }

@@ -6,7 +6,7 @@ let config;
 	player = {
 		x: 400,
 		y: 400,
-		size: 30,
+		size: 300,
 		alive: true,
 		speed: pSpeedDe
 	},
@@ -24,7 +24,8 @@ let config;
 		keyD = false,
 		sprint = false,
 		sprintbar = 100,
-		blocks = [];
+		blocks = [],
+		winner = false;
 //--END CONFIG --\\
 })();
 let preinit;

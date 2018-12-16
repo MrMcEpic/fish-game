@@ -1,18 +1,15 @@
-function writer() {
-	let _size = `Size: ${Math.floor(player.size)}`;
-	c.textAlign = "left";
-	c.fillStyle = "Black";
-	c.font = "30px Roboto";
-	c.fillText(_size, 10, 40);
-	c.fillText(`Sprint: ${Math.floor(sprintbar)}`, 10, 70);
-}
-
-function lose() {
-	c.fillStyle = "red";
+function end() {
 	c.textAlign = "center";
 	c.font = "60px Roboto";
-	c.fillText("You Lose!", cWidth / 2, cHeight / 2);
-	c.strokeText("You Lose!", cWidth / 2, cHeight / 2);
+	if (!winner) {
+		c.fillStyle = "red";
+		c.fillText("You Lose!", cWidth / 2, cHeight / 2);
+		c.strokeText("You Lose!", cWidth / 2, cHeight / 2);
+	} else {
+		c.fillStyle = "green";
+		c.fillText("You Win!", cWidth / 2, cHeight / 2);
+		c.strokeText("You Win!", cWidth / 2, cHeight / 2);
+	}
 	c.font = "20px Roboto";
 	c.fillText("Press R to play again!", cWidth / 2, cHeight / 2 + 100);
 	c.strokeText("Press R to play again!", cWidth / 2, cHeight / 2 + 100);
@@ -31,7 +28,7 @@ const loadOrder = () => {
 		pMover();
 		writer();
 	} else {
-		lose();
+		end();
 	}
 };
 
