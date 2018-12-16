@@ -27,7 +27,7 @@ const boxDraw = () => { //this solves blinking bug
 	let i;
 	for (i in blocks) {
 		let box = blocks[i];
-		c.fillStyle = "red";
+		c.fillStyle = "orangered";
 		c.fillRect(box.x, box.y, box.size, box.size); //this part updates/draws boxes
 	}
 };
