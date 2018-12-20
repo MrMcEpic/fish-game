@@ -1,5 +1,7 @@
 let config;
 (config = () => {
+	winWidth = window.innerWidth;
+	winHeight = window.innerHeight;
 //--CONFIG--\\
 	pSpeedDe = 2,
 	pSprintDe = 6;
@@ -16,8 +18,8 @@ let config;
 		markers = true,
 		geMin = 5,
 		geMax = 150,
-		cWidth = 800,
-		cHeight = 800,
+		cWidth = winWidth - 100,
+		cHeight = winHeight - 100,
 		keyW = false,
 		keyA = false,
 		keyS = false,
