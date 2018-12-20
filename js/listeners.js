@@ -93,5 +93,7 @@ function domloaded() { //once canvas is loaded, start animation
 	<li><s>sprint</s></li>\
 	<li>hard mode col spawn</li>\
 	<li>sprites</li>\
+	<li><s>dynamic rez</s></li>\
+	<li>different fish types</li>\
 	</ul>";
 }

@@ -14,10 +14,10 @@ function spawner() { // create enemies
 	}
 	if (blocks.length < limit) {
 		blocks.push({
-			size: size,
-			x: x,
-			y: y,
-			speed: speed
+			size,//itll auto define speed = speed (speed: speed) because both have the same name
+			x,
+			y,
+			speed
 		});
 	}
 }
