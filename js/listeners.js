@@ -96,4 +96,5 @@ function domloaded() { //once canvas is loaded, start animation
 	<li><s>dynamic rez</s></li>\
 	<li>different fish types</li>\
 	</ul>";
+	window.scroll(0, winY / 6.5);
 }

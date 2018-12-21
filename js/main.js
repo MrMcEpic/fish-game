@@ -19,14 +19,10 @@ const loadOrder = () => {
 	if (player.alive) {
 		window.requestAnimationFrame(drawStuff);
 		checks();
-		pDraw();
-		mark();
 		spawnTime();
 		boxBehave();
 		boxDraw();
-		sprintLogic();
-		pMover();
-		writer();
+		playerFunc();
 	} else {
 		end();
 	}

@@ -6,7 +6,6 @@ header {
   height: 120px;
   border-radius: 3px;
   display: inline-block;
-  margin: 0 0 10px 0;
 }
 
 header a{
@@ -17,7 +16,6 @@ header a{
 header a:hover, header:hover{
   color:white;
 }
-
 
 .ull { 
   display:table;

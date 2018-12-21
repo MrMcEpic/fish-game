@@ -1,25 +1,18 @@
 let config;
 (config = () => {
-	winWidth = window.innerWidth;
-	winHeight = window.innerHeight;
+	winW = window.innerWidth;
+	winY = window.innerHeight;
 //--CONFIG--\\
 	pSpeedDe = 2,
-	pSprintDe = 6;
-	player = {
-		x: 400,
-		y: 400,
-		size: 30,
-		alive: true,
-		speed: pSpeedDe
-	},
+		pSprintDe = 6,
 		limit = 10,
 		wtfMode = false,
 		paint = false,
 		markers = true,
 		geMin = 5,
 		geMax = 150,
-		cWidth = winWidth - 100,
-		cHeight = winHeight - 100,
+		cWidth = winW - winW / 9.45,
+		cHeight = winY - winY / 8.9,
 		keyW = false,
 		keyA = false,
 		keyS = false,
@@ -27,17 +20,26 @@ let config;
 		sprint = false,
 		sprintbar = 100,
 		blocks = [],
-		winner = false;
+		winner = false,
+		player = {
+			x: cWidth / 2,
+			y: cHeight / 2,
+			size: 30,
+			alive: true,
+			speed: pSpeedDe
+		};
 //--END CONFIG --\\
 })();
 let preinit;
 (preinit = () => { //function autocalls itself
+	let infoText = window.innerWidth;
+	//let infoText = "<p>WASD or arrow keys to move, Shift to dash, H for wtfmode, P to paint, M for markers</p>";
 	var requestAnimationFrame = window.requestAnimationFrame ||
 		window.mozRequestAnimationFrame ||
 		window.webkitRequestAnimationFrame ||
 		window.msRequestAnimationFrame;
 	window.requestAnimationFrame = requestAnimationFrame;
-	document.getElementById("info").innerHTML = "WASD or arrow keys to move, Shift to sprint, H for wtfmode, P to paint, M for markers";
+	document.getElementById("info").innerHTML = infoText;
 	canvas = document.createElement('canvas'), //create canvas
 		canvas.id = "myCanvas",
 		canvas.width = cWidth,

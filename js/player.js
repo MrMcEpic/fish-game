@@ -1,3 +1,15 @@
+const limiter = () => {
+	if (player.size >= 70 && limit <= 15) {
+		limit = 15;
+	} else if (player.size >= 60 && limit < 14) {
+		limit = 14;
+	} else if (player.size >= 50 && limit < 13) {
+		limit = 13;
+	} else if (player.size >= 40 && limit < 12) {
+		limit = 12;
+	}
+};
+
 const pHit = (box, i, arr) => {
 	if (player.size > box.size) {
 		despawn(i, arr);
@@ -6,15 +18,7 @@ const pHit = (box, i, arr) => {
 			player.alive = false;
 			winner = true;
 		}
-		if (player.size >= 70 && limit <= 15) {
-			limit = 15;
-		} else if (player.size >= 60 && limit < 14) {
-			limit = 14;
-		} else if (player.size >= 50 && limit < 13) {
-			limit = 13;
-		} else if (player.size >= 40 && limit < 12) {
-			limit = 12;
-		}
+		limiter();
 	} else {
 		player.alive = false;
 	}
@@ -81,3 +85,11 @@ function writer() {
 	c.fillText(_size, 10, 40);
 	c.fillText(`Sprint: ${Math.floor(sprintbar)}`, 10, 70);
 }
+
+const playerFunc = () => {
+	pDraw();
+	mark();
+	sprintLogic();
+	pMover();
+	writer();
+};
