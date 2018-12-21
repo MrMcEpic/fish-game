@@ -1,4 +1,5 @@
 function end() {
+	player.alive = false;
 	c.textAlign = "center";
 	c.font = "60px Roboto";
 	if (!winner) {

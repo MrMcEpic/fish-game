@@ -10,17 +10,21 @@ const limiter = () => {
 	}
 };
 
+const maxer = () => {
+	//pass
+};
+
 const pHit = (box, i, arr) => {
 	if (player.size > box.size) {
 		despawn(i, arr);
 		player.size += box.size / 10;
 		if (player.size >= 400) {
-			player.alive = false;
+			end();
 			winner = true;
 		}
 		limiter();
 	} else {
-		player.alive = false;
+		end();
 	}
 	return arr.length;
 };

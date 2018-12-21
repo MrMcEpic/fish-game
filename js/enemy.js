@@ -27,7 +27,19 @@ const boxDraw = () => { //this solves blinking bug
 	let i;
 	for (i in blocks) {
 		let box = blocks[i];
-		c.fillStyle = "orangered";
-		c.fillRect(box.x, box.y, box.size, box.size); //this part updates/draws boxes
+		if (box.size < player.size) {
+			c.fillStyle = "orangered";
+			c.fillRect(box.x, box.y, box.size, box.size);
+			if (boxMarker) {
+				c.fillStyle = "green";
+				c.fillRect(box.x + box.size - box.size / 10, box.y, box.size / 10, box.size);
+				c.fillRect(box.x, box.y, box.size / 10, box.size);
+				c.fillRect(box.x, box.y, box.size, box.size / 10);
+				c.fillRect(box.x, box.y + box.size - box.size / 10, box.size, box.size / 10);
+			}
+		} else {
+			c.fillStyle = "orangered";
+			c.fillRect(box.x, box.y, box.size, box.size); //this part updates/draws boxes
+		}
 	}
 };

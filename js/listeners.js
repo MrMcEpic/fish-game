@@ -72,6 +72,9 @@ function onKeyUp(event) {
 		case 16:
 			sprint = false;
 			break;
+		case 71: //g
+			boxMarker = !boxMarker;
+			break;
 		default:
 			break;
 	}

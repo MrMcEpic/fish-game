@@ -9,6 +9,7 @@ let config;
 		wtfMode = false,
 		paint = false,
 		markers = true,
+		boxMarker = true,
 		geMin = 5,
 		geMax = 150,
 		cWidth = winW - winW / 9.45,
@@ -32,7 +33,7 @@ let config;
 })();
 let preinit;
 (preinit = () => { //function autocalls itself
-	let infoText = "<p>WASD or arrow keys to move, Shift to dash, H for wtfmode, P to paint, M for markers</p>";
+	let infoText = "<p>WASD or arrow keys to move, Shift to dash, H for wtfmode, G to disable training wheels, P to paint, M for markers</p>";
 	var requestAnimationFrame = window.requestAnimationFrame ||
 		window.mozRequestAnimationFrame ||
 		window.webkitRequestAnimationFrame ||
