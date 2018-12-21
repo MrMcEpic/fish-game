@@ -32,8 +32,7 @@ let config;
 })();
 let preinit;
 (preinit = () => { //function autocalls itself
-	let infoText = window.innerWidth;
-	//let infoText = "<p>WASD or arrow keys to move, Shift to dash, H for wtfmode, P to paint, M for markers</p>";
+	let infoText = "<p>WASD or arrow keys to move, Shift to dash, H for wtfmode, P to paint, M for markers</p>";
 	var requestAnimationFrame = window.requestAnimationFrame ||
 		window.mozRequestAnimationFrame ||
 		window.webkitRequestAnimationFrame ||
