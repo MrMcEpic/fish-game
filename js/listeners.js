@@ -83,9 +83,7 @@ function onKeyUp(event) {
 }
 
 function onMouseDown(event) {
-	console.log(`x: ${event.clientX}, y: ${event.clientY}`);
-	var canvas = document.getElementById('myCanvas');
-  var rect = canvas.getBoundingClientRect();
+  let rect = canvas.getBoundingClientRect();
 	player.destination.X = event.clientX-rect.left;
 	player.destination.Y = event.clientY-rect.top;
 }
