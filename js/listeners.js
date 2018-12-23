@@ -125,5 +125,5 @@ function domloaded() { //once canvas is loaded, start animation
 	<li>different fish types</li>\
 	<li>(Basic) <s>mobile controls</s></li>\
 	</ul>";
-	window.scroll(0, winY / 6.3);
+	window.scroll(0, winY / 6.7);
 }
