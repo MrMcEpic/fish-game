@@ -1,3 +1,20 @@
+function detectmob() { 
+	if( navigator.userAgent.match(/Android/i)
+		|| navigator.userAgent.match(/webOS/i)
+		|| navigator.userAgent.match(/iPhone/i)
+		|| navigator.userAgent.match(/iPad/i)
+		|| navigator.userAgent.match(/iPod/i)
+		|| navigator.userAgent.match(/BlackBerry/i)
+		|| navigator.userAgent.match(/Windows Phone/i)
+		|| navigator.userAgent.match(/Opera Mini/i)
+		|| navigator.userAgent.match(/IEMobile/i)
+		|| navigator.userAgent.match(/WPDesktop/i)) {
+			return true;
+	} else {
+			return false;
+	}
+}
+
 //--event listeners--\\
 window.addEventListener("keydown", onKeyDown, false);
 window.addEventListener("keyup", onKeyUp, false);
@@ -143,7 +160,7 @@ function domloaded() { //once canvas is loaded, start animation
 	<li>different fish types</li>\
 	<li>(Basic) <s>mobile controls</s></li>\
 	</ul>";
-	if (isMobileDevice()) {
+	if (isMobileDevice() || detectmob()) {
 		window.scroll(0, winY / 10);
 	} else {
 		window.scroll(0, winY / 6.5);
