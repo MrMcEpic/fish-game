@@ -13,15 +13,15 @@ document.addEventListener("DOMContentLoaded", domloaded, false);
 //----\\
 let lastTap;
 function touchHandler(event) {
+	event.preventDefault();
 	if (!player.alive) {
 		config();
 		loadOrder();
 	}
-	event.preventDefault();
 	let rect = canvas.getBoundingClientRect();
 	let now = new Date().getTime();
 	let timeSince = now - lastTap;
-	if (timeSince < 600 && timeSince > 0) {
+	if (timeSince < 300 && timeSince > 0) {
 		if (!sprintDis) {
 			player.destination.sprint = true;
 		} else {
@@ -116,8 +116,9 @@ function onMouseDown(event) {
 	if (timeSince < 300 && timeSince > 0) {
 		if (!sprintDis) {
 			player.destination.sprint = true;
-		} else { // this prevents player from bypassing sprint disabled
+		} else {
 			player.destination.sprint = false;
+			sprint = false;
 		}
 	}
 	lastTap = now;
