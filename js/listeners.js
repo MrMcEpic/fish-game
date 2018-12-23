@@ -113,7 +113,7 @@ function onMouseDown(event) {
 	let rect = canvas.getBoundingClientRect();
 	let now = new Date().getTime();
 	let timeSince = now - lastTap;
-	if (timeSince < 600 && timeSince > 0) {
+	if (timeSince < 300 && timeSince > 0) {
 		if (!sprintDis) {
 			player.destination.sprint = true;
 		} else { // this prevents player from bypassing sprint disabled
