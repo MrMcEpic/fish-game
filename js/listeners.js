@@ -119,6 +119,10 @@ function onMouseDown(event) {
 	player.destination.Y = event.clientY-rect.top;
 }
 
+function isMobileDevice() {
+	return typeof window.orientation !== "undefined" || navigator.userAgent.indexOf('IEMobile') !== -1;
+}
+
 function domloaded() { //once canvas is loaded, start animation
 	drawStuff();
 	document.getElementById("goals").innerHTML = 
@@ -139,5 +143,9 @@ function domloaded() { //once canvas is loaded, start animation
 	<li>different fish types</li>\
 	<li>(Basic) <s>mobile controls</s></li>\
 	</ul>";
-	window.scroll(0, winY / 7);
+	if (isMobileDevice()) {
+		window.scroll(0, winY / 7.5);
+	} else {
+		window.scroll(0, winY / 6.5);
+	}
 }

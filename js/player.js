@@ -36,6 +36,7 @@ const sprintLogic = () => {
 		sprint = false;
 	}
 	if (sprintbar <= 0) {
+		player.destination.sprint = false;
 		sprint = false;
 	}
 
