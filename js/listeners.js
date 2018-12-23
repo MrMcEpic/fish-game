@@ -144,7 +144,7 @@ function domloaded() { //once canvas is loaded, start animation
 	<li>(Basic) <s>mobile controls</s></li>\
 	</ul>";
 	if (isMobileDevice()) {
-		window.scroll(0, winY / 7.5);
+		window.scroll(0, winY / 10);
 	} else {
 		window.scroll(0, winY / 6.5);
 	}
