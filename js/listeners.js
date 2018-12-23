@@ -15,8 +15,12 @@ function touchHandler(event) {
 	let rect = canvas.getBoundingClientRect();
 	let now = new Date().getTime();
 	let timeSince = now - lastTap;
-	if (timeSince < 600 && timeSince > 0 && !sprintDis) {
-		player.destination.sprint = true;
+	if (timeSince < 600 && timeSince > 0) {
+		if (!sprintDis) {
+			player.destination.sprint = true;
+		} else {
+			player.destination.sprint = false;
+		}
 	}
 	lastTap = now;
 	player.destination.X = event.touches[0].clientX-rect.left;
@@ -103,8 +107,12 @@ function onMouseDown(event) {
 	let rect = canvas.getBoundingClientRect();
 	let now = new Date().getTime();
 	let timeSince = now - lastTap;
-	if (timeSince < 600 && timeSince > 0 && !sprintDis) {
-		player.destination.sprint = true;
+	if (timeSince < 600 && timeSince > 0) {
+		if (!sprintDis) {
+			player.destination.sprint = true;
+		} else {
+			player.destination.sprint = false;
+		}
 	}
 	lastTap = now;
 	player.destination.X = event.clientX-rect.left;
@@ -131,5 +139,5 @@ function domloaded() { //once canvas is loaded, start animation
 	<li>different fish types</li>\
 	<li>(Basic) <s>mobile controls</s></li>\
 	</ul>";
-	window.scroll(0, winY / 6.7);
+	window.scroll(0, winY / 7);
 }
