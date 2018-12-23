@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", domloaded, false);
 
 function touchHandler(event) {
 	event.preventDefault();
+	let rect = canvas.getBoundingClientRect();
+	player.destination.X = event.clientX-rect.left;
+	player.destination.Y = event.clientY-rect.top;
 }
 
 function onKeyDown(event) {
