@@ -26,6 +26,7 @@ function touchHandler(event) {
 			player.destination.sprint = true;
 		} else {
 			player.destination.sprint = false;
+			sprint = false;
 		}
 	}
 	lastTap = now;
