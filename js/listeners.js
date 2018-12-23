@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", domloaded, false);
 function touchHandler(event) {
 	event.preventDefault();
 	let rect = canvas.getBoundingClientRect();
-	player.destination.X = event.clientX-rect.left;
-	player.destination.Y = event.clientY-rect.top;
+	player.destination.X = event.touches[0].clientX-rect.left;
+	player.destination.Y = event.touches[0].clientY-rect.top;
 }
 
 function onKeyDown(event) {
