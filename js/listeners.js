@@ -8,6 +8,10 @@ document.addEventListener("DOMContentLoaded", domloaded, false);
 //----\\
 
 function touchHandler(event) {
+	if (!player.alive) {
+		config();
+		loadOrder();
+	}
 	event.preventDefault();
 	let rect = canvas.getBoundingClientRect();
 	player.destination.X = event.touches[0].clientX-rect.left;

@@ -12,8 +12,8 @@ function end() {
 		c.strokeText("You Win!", cWidth / 2, cHeight / 2);
 	}
 	c.font = "20px Roboto";
-	c.fillText("Press R to play again!", cWidth / 2, cHeight / 2 + 100);
-	c.strokeText("Press R to play again!", cWidth / 2, cHeight / 2 + 100);
+	c.fillText("Press R or touch to play again!", cWidth / 2, cHeight / 2 + 100);
+	c.strokeText("Press R or touch to play again!", cWidth / 2, cHeight / 2 + 100);
 }
 
 const loadOrder = () => {
