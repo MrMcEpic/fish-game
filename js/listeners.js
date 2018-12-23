@@ -8,9 +8,7 @@ document.addEventListener("DOMContentLoaded", domloaded, false);
 //----\\
 
 function touchHandler(event) {
-	if (event.touches.length > 1) {
-		event.preventDefault();
-	}
+	event.preventDefault();
 }
 
 function onKeyDown(event) {

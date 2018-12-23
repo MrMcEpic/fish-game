@@ -49,5 +49,4 @@ let preinit;
 		div = document.getElementById("canvashold"); //get canvas placeholder
 		div.appendChild(canvas); //put canvas in placeholder
 	c = document.getElementById("myCanvas").getContext("2d"); //not using var,let,const makes it global
-	hdebug = document.getElementById("hitdebug"); //speeds code to not constantly grab from dom
 })();
