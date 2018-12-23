@@ -1,6 +1,8 @@
 //--event listeners--\\
 window.addEventListener("keydown", onKeyDown, false);
 window.addEventListener("keyup", onKeyUp, false);
+myCanvas.addEventListener("mousedown", onMouseDown, false);
+myCanvas.addEventListener("mouseup", onMouseUp, false);
 document.addEventListener("DOMContentLoaded", domloaded, false);
 //----\\
 
@@ -80,6 +82,19 @@ function onKeyUp(event) {
 	}
 }
 
+function onMouseDown(event) {
+	console.log(`x: ${event.clientX}, y: ${event.clientY}`);
+	var canvas = document.getElementById('myCanvas');
+  var rect = canvas.getBoundingClientRect();
+	player.destination.X = event.clientX-rect.left;
+	player.destination.Y = event.clientY-rect.top;
+}
+
+function onMouseUp(event) {
+	// player.destination.X = null;
+	// player.destination.Y = null;
+}
+
 function domloaded() { //once canvas is loaded, start animation
 	drawStuff();
 	document.getElementById("goals").innerHTML = 
@@ -98,6 +113,7 @@ function domloaded() { //once canvas is loaded, start animation
 	<li>sprites</li>\
 	<li><s>dynamic rez</s></li>\
 	<li>different fish types</li>\
+	<li>(Basic) <s>mobile controls</s></li>\
 	</ul>";
 	window.scroll(0, winY / 6.5);
 }

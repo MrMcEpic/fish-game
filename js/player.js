@@ -64,11 +64,32 @@ function pMover() {
 	if (keyW && player.y > 0) {
 		player.y -= player.speed;
 	}
+	//\\
+	if (player.destination) {
+		if (Math.abs(player.destination.X - (player.x + player.size / 2)) > 3 || Math.abs(player.destination.Y - (player.y + player.size / 2)) > 3) {
+			if (player.destination !== {}) {
+				if (player.destination.X - player.size / 2 > player.x + 1) { // move right
+					player.x += player.speed;
+				} else if (player.destination.X - player.size / 2 < player.x - 1) {// move left
+					player.x -= player.speed;
+				}
+				if (player.destination.Y - player.size / 2 > player.y + 1) { // move down
+					player.y += player.speed;
+				} else if (player.destination.Y - player.size / 2 < player.y - 1) {// move up
+					player.y -= player.speed;
+				}
+			} else {
+				player.destination = {};
+			}
+		}
+	}
 }
 
 const pDraw = () => {
 	c.fillStyle = "coral";
 	c.fillRect(player.x, player.y, player.size, player.size); //draw player
+	c.fillStyle = 'purple';
+	c.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
 };
 
 function mark() {

@@ -27,7 +27,8 @@ let config;
 			y: cHeight / 2,
 			size: 30,
 			alive: true,
-			speed: pSpeedDe
+			speed: pSpeedDe,
+			destination: {}
 		};
 //--END CONFIG --\\
 })();
