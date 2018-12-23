@@ -2,11 +2,10 @@
 window.addEventListener("keydown", onKeyDown, false);
 window.addEventListener("keyup", onKeyUp, false);
 myCanvas.addEventListener("mousedown", onMouseDown, false);
-myCanvas.addEventListener("mouseup", onMouseUp, false);
 myCanvas.addEventListener("touchstart", touchHandler, false);
 document.addEventListener("DOMContentLoaded", domloaded, false);
 //----\\
-
+let lastTap;
 function touchHandler(event) {
 	if (!player.alive) {
 		config();
@@ -14,8 +13,14 @@ function touchHandler(event) {
 	}
 	event.preventDefault();
 	let rect = canvas.getBoundingClientRect();
+	let now = new Date().getTime();
+	let timeSince = now - lastTap;
+	if (timeSince < 600 && timeSince > 0 && !sprintDis) {
+		player.destination.sprint = true;
+	}
+	lastTap = now;
 	player.destination.X = event.touches[0].clientX-rect.left;
-	player.destination.Y = event.touches[0].clientY-rect.top;
+	player.destination.Y = event.touches[0].clientY - rect.top;
 }
 
 function onKeyDown(event) {
@@ -95,14 +100,15 @@ function onKeyUp(event) {
 }
 
 function onMouseDown(event) {
-  let rect = canvas.getBoundingClientRect();
+	let rect = canvas.getBoundingClientRect();
+	let now = new Date().getTime();
+	let timeSince = now - lastTap;
+	if (timeSince < 600 && timeSince > 0 && !sprintDis) {
+		player.destination.sprint = true;
+	}
+	lastTap = now;
 	player.destination.X = event.clientX-rect.left;
 	player.destination.Y = event.clientY-rect.top;
-}
-
-function onMouseUp(event) {
-	// player.destination.X = null;
-	// player.destination.Y = null;
 }
 
 function domloaded() { //once canvas is loaded, start animation

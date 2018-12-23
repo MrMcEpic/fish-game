@@ -34,7 +34,7 @@ let config;
 })();
 let preinit;
 (preinit = () => { //function autocalls itself
-	let infoText = "<p>WASD or arrow keys to move, Shift to dash, H for wtfmode, G to disable training wheels, P to paint, M for markers</p>";
+	let infoText = "<p>WASD or arrow keys to move, Shift or double tap to dash, H for wtfmode, G to disable training wheels, P to paint, M for markers</p>";
 	var requestAnimationFrame = window.requestAnimationFrame ||
 		window.mozRequestAnimationFrame ||
 		window.webkitRequestAnimationFrame ||

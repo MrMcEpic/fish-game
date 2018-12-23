@@ -30,6 +30,11 @@ const pHit = (box, i, arr) => {
 };
 
 const sprintLogic = () => {
+	if (player.destination.sprint) {
+		sprint = true;
+	} else {
+		sprint = false;
+	}
 	if (sprintbar <= 0) {
 		sprint = false;
 	}
@@ -66,15 +71,15 @@ function pMover() {
 	}
 	//\\
 	if (player.destination !== {}) {
-		if (Math.abs(player.destination.X - (player.x + player.size / 2)) > 3 || Math.abs(player.destination.Y - (player.y + player.size / 2)) > 3) {
-			if (player.destination.X - player.size / 2 > player.x + 1) { // move right
+		if (Math.abs(player.destination.X - (player.x + player.size / 2)) > 5 || Math.abs(player.destination.Y - (player.y + player.size / 2)) > 5) {
+			if (player.destination.X - player.size / 2 > player.x + 3) { // move right
 				player.x += player.speed;
-			} else if (player.destination.X - player.size / 2 < player.x - 1) { // move left
+			} else if (player.destination.X - player.size / 2 < player.x - 3) { // move left
 				player.x -= player.speed;
 			}
-			if (player.destination.Y - player.size / 2 > player.y + 1) { // move down
+			if (player.destination.Y - player.size / 2 > player.y + 3) { // move down
 				player.y += player.speed;
-			} else if (player.destination.Y - player.size / 2 < player.y - 1) { // move up
+			} else if (player.destination.Y - player.size / 2 < player.y - 3) { // move up
 				player.y -= player.speed;
 			}
 		} else {
