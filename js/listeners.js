@@ -83,7 +83,6 @@ function onKeyUp(event) {
 }
 
 function onMouseDown(event) {
-	event.preventDefault();
   let rect = canvas.getBoundingClientRect();
 	player.destination.X = event.clientX-rect.left;
 	player.destination.Y = event.clientY-rect.top;
