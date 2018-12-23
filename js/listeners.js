@@ -95,7 +95,6 @@ function onKeyUp(event) {
 			if (!player.alive) {
 				config();
 				loadOrder();
-				//preinit();
 			}
 			break;
 		case 16:
@@ -110,23 +109,20 @@ function onKeyUp(event) {
 }
 
 function onMouseDown(event) {
+	event.preventDefault();
 	let rect = canvas.getBoundingClientRect();
 	let now = new Date().getTime();
 	let timeSince = now - lastTap;
 	if (timeSince < 600 && timeSince > 0) {
 		if (!sprintDis) {
 			player.destination.sprint = true;
-		} else {
+		} else { // this prevents player from bypassing sprint disabled
 			player.destination.sprint = false;
 		}
 	}
 	lastTap = now;
 	player.destination.X = event.clientX-rect.left;
 	player.destination.Y = event.clientY-rect.top;
-}
-
-function isMobileDevice() {
-	return typeof window.orientation !== "undefined" || navigator.userAgent.indexOf('IEMobile') !== -1;
 }
 
 function domloaded() { //once canvas is loaded, start animation

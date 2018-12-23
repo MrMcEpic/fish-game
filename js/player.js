@@ -32,9 +32,8 @@ const pHit = (box, i, arr) => {
 const sprintLogic = () => {
 	if (player.destination.sprint) {
 		sprint = true;
-	} else {
-		sprint = false;
 	}
+	
 	if (sprintbar <= 0) {
 		player.destination.sprint = false;
 		sprint = false;
@@ -71,7 +70,7 @@ function pMover() {
 		player.y -= player.speed;
 	}
 	//\\
-	if (player.destination !== {}) {
+	if (!jQuery.isEmptyObject(player.destination)) {
 		if (Math.abs(player.destination.X - (player.x + player.size / 2)) > 5 || Math.abs(player.destination.Y - (player.y + player.size / 2)) > 5) {
 			if (player.destination.X - player.size / 2 > player.x + 3) { // move right
 				player.x += player.speed;
@@ -85,6 +84,7 @@ function pMover() {
 			}
 		} else {
 			player.destination = {};
+			sprint = false;
 		}
 	}
 }
