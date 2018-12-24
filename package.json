@@ -1,0 +1,23 @@
+{
+  "name": "fish-game",
+  "version": "1.0.0",
+  "description": "fish game",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrMcEpic/fish-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrMcEpic/fish-game/issues"
+  },
+  "homepage": "https://github.com/MrMcEpic/fish-game#readme",
+  "devDependencies": {
+    "electron": "^4.0.0",
+    "electron-packager": "^13.0.1"
+  }
+}
