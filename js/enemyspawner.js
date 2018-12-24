@@ -15,7 +15,7 @@ function spawner() { // create enemies
 		x = 0 - 160;
 		speed = -zoom;
 		eimg = eimgR;
-		eimgS = eimgLS;
+		eimgS = eimgRS;
 	}
 	if (blocks.length < limit) {
 		blocks.push({
