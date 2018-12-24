@@ -13,7 +13,7 @@ function boxBehave() {
 			l = despawn(i, blocks);
 			continue;
 		}
-		if (box.y + box.size >= player.y && box.y <= player.y + player.size) { //hit detection 
+		if (box.y + box.size >= player.y && box.y <= player.y + player.size * 0.667) { //hit detection 
 			if (box.x + box.size >= player.x && box.x <= player.x + player.size) {
 				l = pHit(box, i, blocks);
 				continue;

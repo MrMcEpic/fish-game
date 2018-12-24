@@ -1,3 +1,12 @@
+let imgR = new Image();
+imgR.src = './fishR.png';
+
+let imgL = new Image();
+imgL.src = './fishL.png';
+
+let img = imgR;
+
+
 const limiter = () => {
 	if (player.size >= 70 && limit <= 15) {
 		limit = 15;
@@ -56,31 +65,49 @@ const sprintLogic = () => {
 	}
 };
 
+function mover(x) {
+	switch (x) {
+		case 'left':
+			img = imgL;
+			player.x -= player.speed;
+			break;
+		case 'right':
+			img = imgR;
+			player.x += player.speed;
+			break;
+		case 'up':
+			player.y -= player.speed;
+			break;
+		case 'down':
+			player.y += player.speed;
+	}
+}
+
 function pMover() {
 	if (keyD && player.x < cWidth - player.size) {
-		player.x += player.speed;
+		mover('right');
 	}
 	if (keyS && player.y < cHeight - player.size) {
-		player.y += player.speed;
+		mover('down');
 	}
 	if (keyA && player.x > 0) {
-		player.x -= player.speed;
+		mover('left');
 	}
 	if (keyW && player.y > 0) {
-		player.y -= player.speed;
+		mover('up');
 	}
 	//\\
 	if (!jQuery.isEmptyObject(player.destination)) {
 		if (Math.abs(player.destination.X - (player.x + player.size / 2)) > 5 || Math.abs(player.destination.Y - (player.y + player.size / 2)) > 5) {
 			if (player.destination.X - player.size / 2 > player.x + 3) { // move right
-				player.x += player.speed;
+				mover('right');
 			} else if (player.destination.X - player.size / 2 < player.x - 3) { // move left
-				player.x -= player.speed;
+				mover('left');
 			}
 			if (player.destination.Y - player.size / 2 > player.y + 3) { // move down
-				player.y += player.speed;
+				mover('down');
 			} else if (player.destination.Y - player.size / 2 < player.y - 3) { // move up
-				player.y -= player.speed;
+				mover('up');
 			}
 		} else {
 			player.destination = {};
@@ -90,10 +117,11 @@ function pMover() {
 }
 
 const pDraw = () => {
-	c.fillStyle = "coral";
-	c.fillRect(player.x, player.y, player.size, player.size); //draw player
 	c.fillStyle = 'purple';
 	c.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
+	c.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, (player.size * 0.667));
+	// c.fillStyle = "coral";
+	// c.fillRect(player.x, player.y, player.size, player.size); //draw player
 };
 
 function mark() {
@@ -117,7 +145,7 @@ function writer() {
 
 const playerFunc = () => {
 	pDraw();
-	mark();
+	//mark();
 	sprintLogic();
 	pMover();
 	writer();
