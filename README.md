@@ -1,3 +1,2 @@
 # Fish Game
-## WIP: 
-### Design is to create a game where the player eats smaller fish to get bigger
+Eat smaller fish, get bigger. Don't get eaten.
