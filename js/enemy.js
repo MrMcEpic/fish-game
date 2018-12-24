@@ -1,4 +1,4 @@
-const despawn = (i, arr) => {
+const despawn = (i, arr) => {//deletes enemy object from list of enemies and returns list length back
 	arr.splice(i, 1);
 	return arr.length;
 };
