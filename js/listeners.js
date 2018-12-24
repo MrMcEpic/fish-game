@@ -36,8 +36,11 @@ function touchHandler(event) {
 
 function onKeyDown(event) {
 	if([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) { //disables arrow key scrolling
-      event.preventDefault();
-    }
+    event.preventDefault();
+	}
+	if ([68, 39, 40, 83, 37, 65, 38, 87].indexOf(event.keyCode) > -1) {
+		player.destination = {};//stop click movement if using keys
+	}
 	switch (event.which) {
 		case 39:
 		case 68:
