@@ -4,6 +4,12 @@ eimgR.src = './efishR.png';
 let eimgL = new Image();
 eimgL.src = './efishL.png';
 
+let eimgRS = new Image();
+eimgRS.src = './efishRY.png';
+
+let eimgLS = new Image();
+eimgLS.src = './efishLY.png';
+
 const despawn = (i, arr) => {//deletes enemy object from list of enemies and returns list length back
 	arr.splice(i, 1);
 	return arr.length;
@@ -33,20 +39,14 @@ const boxDraw = () => { //this solves blinking bug
 	let i;
 	for (i in blocks) {
 		let box = blocks[i];
-		// if (box.size < player.size) {
-		// 	c.fillStyle = "orangered";
-		// 	c.fillRect(box.x, box.y, box.size, box.size);
-		// 	if (boxMarker) {
-		// 		c.fillStyle = "green";
-		// 		c.fillRect(box.x + box.size - box.size / 10, box.y, box.size / 10, box.size);
-		// 		c.fillRect(box.x, box.y, box.size / 10, box.size);
-		// 		c.fillRect(box.x, box.y, box.size, box.size / 10);
-		// 		c.fillRect(box.x, box.y + box.size - box.size / 10, box.size, box.size / 10);
-		// 	}
-		// } else {
-		//	c.fillStyle = "orangered";
-		//	c.fillRect(box.x, box.y, box.size, box.size); //this part updates/draws boxes
-		//}
-		c.drawImage(box.eimg, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
+		if (box.size < player.size) {
+			if (boxMarker) {
+				c.drawImage(box.eimgS, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
+			} else {
+				c.drawImage(box.eimg, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
+			}
+		} else {
+			c.drawImage(box.eimg, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
+		}
 	}
 };
