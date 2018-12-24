@@ -28,7 +28,8 @@ let config;
 			size: 30,
 			alive: true,
 			speed: pSpeedDe,
-			destination: {}
+			destination: {},
+			lastDirect: 'R'
 		};
 //--END CONFIG --\\
 })();
