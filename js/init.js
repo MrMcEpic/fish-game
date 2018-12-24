@@ -40,7 +40,7 @@ let preinit;
 		window.webkitRequestAnimationFrame ||
 		window.msRequestAnimationFrame;
 	window.requestAnimationFrame = requestAnimationFrame;
-	document.getElementById("info").innerHTML = infoText;
+	$("#info").html(infoText);
 	canvas = document.createElement('canvas'), //create canvas
 		canvas.id = "myCanvas",
 		canvas.width = cWidth,
