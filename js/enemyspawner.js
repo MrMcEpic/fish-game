@@ -1,5 +1,6 @@
 function spawner() { // create enemies
 	let x,
+		eimg,
 		speed,
 		size = randRange(geMin, geMax, true),
 		y = Math.abs(randRange(0, cHeight - size, false)),
@@ -8,16 +9,19 @@ function spawner() { // create enemies
 	if (side >= 0.499999) {
 		x = cWidth + 70;
 		speed = zoom;
+		eimg = eimgL;
 	} else {
 		x = 0 - 160;
 		speed = -zoom;
+		eimg = eimgR;
 	}
 	if (blocks.length < limit) {
 		blocks.push({
 			size,//itll auto define speed = speed (speed: speed) because both have the same name
 			x,
 			y,
-			speed
+			speed,
+			eimg
 		});
 	}
 }

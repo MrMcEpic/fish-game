@@ -119,7 +119,7 @@ function pMover() {
 const pDraw = () => {
 	c.fillStyle = 'purple';
 	c.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
-	c.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, (player.size * 0.667));
+	c.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, player.size * 0.667);
 	// c.fillStyle = "coral";
 	// c.fillRect(player.x, player.y, player.size, player.size); //draw player
 };
