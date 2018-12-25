@@ -28,8 +28,8 @@ const pHit = (box, i, arr) => {
 		despawn(i, arr);
 		player.size += box.size / 10;
 		if (player.size >= 400) {
-			end();
 			winner = true;
+			end();
 		}
 		limiter();
 	} else {
@@ -145,7 +145,6 @@ function writer() {
 
 const playerFunc = () => {
 	pDraw();
-	//mark();
 	sprintLogic();
 	pMover();
 	writer();
