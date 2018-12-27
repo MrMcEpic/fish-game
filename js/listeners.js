@@ -70,6 +70,9 @@ function onKeyDown(event) {
 
 function onKeyUp(event) {
 	switch (event.which) {
+		case 49:
+			started = true;
+			break;
 		case 39:
 		case 68: //d
 			keyD = false;
@@ -97,7 +100,7 @@ function onKeyUp(event) {
 			break;
 		case 82: //r
 			if (!player.alive) {
-				config();
+				config(played=true);
 				loadOrder();
 			}
 			break;
@@ -145,7 +148,7 @@ function domloaded() { //once canvas is loaded, start animation
 	<li><s>win condition</s> (semi)</li>\
 	<li><s>sprint</s></li>\
 	<li>hard mode col spawn</li>\
-	<li>sprites</li>\
+	<li><s>sprites</s></li>\
 	<li><s>dynamic rez</s></li>\
 	<li>different fish types</li>\
 	<li>(Basic) <s>mobile controls</s></li>\

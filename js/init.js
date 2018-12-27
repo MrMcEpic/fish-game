@@ -1,5 +1,5 @@
 let config;
-(config = () => {
+(config = (played) => {
 	winW = window.innerWidth;
 	winY = window.innerHeight;
 //--CONFIG--\\
@@ -21,7 +21,10 @@ let config;
 		sprint = false,
 		sprintbar = 100,
 		blocks = [],
-		winner = false,
+		winner = false;
+	if (!played) {
+		started = false;
+	}
 		player = {
 			x: cWidth / 2,
 			y: cHeight / 2,
