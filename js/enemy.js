@@ -50,3 +50,9 @@ function boxDraw () { //this solves blinking bug
 		}
 	}
 }
+
+const boxFunc = () => {
+	spawnTime();
+	boxBehave();
+	boxDraw();
+};

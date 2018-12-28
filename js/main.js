@@ -50,9 +50,7 @@ function loadOrder() {
 		if (player.alive) {
 			window.requestAnimationFrame(drawStuff);
 			checks();
-			spawnTime();
-			boxBehave();
-			boxDraw();
+			boxFunc();
 			playerFunc();
 		} else {
 			end();

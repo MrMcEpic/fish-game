@@ -9,7 +9,6 @@ let config;
 		limit = 10,
 		wtfMode = false,
 		paint = false,
-		markers = true,
 		boxMarker = true,
 		globalEnemyMinimumSize = 5,
 		globalEnemyMaximumSize = 150,

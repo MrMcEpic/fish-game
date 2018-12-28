@@ -133,16 +133,6 @@ const pDraw = () => {
 	context.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, player.size * 0.667);
 };
 
-function mark() {
-	if (markers) {
-		context.fillStyle = "orangered";
-		context.fillRect(player.x + player.size - player.size / 10, player.y, player.size / 10, player.size);
-		context.fillRect(player.x, player.y, player.size / 10, player.size);
-		context.fillRect(player.x, player.y, player.size, player.size / 10);
-		context.fillRect(player.x, player.y + player.size - player.size / 10, player.size, player.size / 10);
-	}
-}
-
 function writer() {
 	let _size = `Size: ${Math.floor(player.size)}`;
 	context.textAlign = "left";

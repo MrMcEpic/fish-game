@@ -1,20 +1,18 @@
 function spawner() { // create enemies
+	const picker = () => Math.random() >= 0.4999999 ? -1 : 1;
 	let x,
 		enemyImage,
 		enemyImageSecondary,
-		speed,
 		size = randRange(globalEnemyMinimumSize, globalEnemyMaximumSize, true),
 		y = Math.abs(randRange(0, canvasHeight - size, false)),
-		side = Math.random(),
-		zoom = randRange(0.5, 4.0, false);
-	if (side >= 0.499999) {
+		side = picker();
+		speed = side * randRange(0.5, 4.0, false);
+	if (side === 1) {
 		x = canvasWidth + 60;
-		speed = zoom;
 		enemyImage = enemyImageLeft;
 		enemyImageSecondary = enemyImageLeftSecondary;
 	} else {
 		x = 0 - (globalEnemyMaximumSize+60);
-		speed = -zoom;
 		enemyImage = enemyImageRight;
 		enemyImageSecondary = enemyImageRightSecondary;
 	}
@@ -30,8 +28,15 @@ function spawner() { // create enemies
 	}
 }
 
-function spawnTime() {
-	if (enemies.length < limit) {
-		setTimeout(spawner, randRange(1000, 10000, false)); // temp?
-	}
+function queue() {
+	return new Promise(resolve => {
+		if (enemies.length < limit) {
+			resolve();
+		}
+	});
+}
+
+async function spawnTime() {
+	await queue();
+	spawner();
 }
