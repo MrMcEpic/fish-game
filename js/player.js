@@ -98,7 +98,7 @@ function pMover() {
 	if (keyD && player.x < canvasWidth - player.size) {
 		mover('right');
 	}
-	if (keyS && player.y < canvasHeight - player.size * 0.668) {
+	if (keyS && player.y < canvasHeight - player.size * fishDrawOffSet) {
 		mover('down');
 	}
 	if (keyA && player.x > 0) {
@@ -128,9 +128,11 @@ function pMover() {
 }
 
 const pDraw = () => {
-	context.fillStyle = 'purple';
-	context.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
-	context.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, player.size * 0.667);
+	context.strokeStyle = 'purple';
+	//context.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
+	context.arc(player.destination.X, player.destination.Y, 10, 0, Math.PI * 2);
+	context.stroke();
+	context.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, player.size * fishDrawOffSet);
 };
 
 function writer() {

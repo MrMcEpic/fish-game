@@ -3,7 +3,12 @@ let config;
 	winW = window.innerWidth;
 	winY = window.innerHeight;
 //--CONFIG--\\
-	playerSpeedDefault = 2,
+	hitBoxOffSetYLow = 0.43,
+		hitBoxOffSetYHigh = 0.18,
+		hitBoxOffSetXLow = 0.80,
+		hitBoxOffSetXHigh = 0,
+		fishDrawOffSet = 0.667,
+		playerSpeedDefault = 2,
 		playerSprintDefault = 6,
 		growthDivider = 10;
 		limit = 10,

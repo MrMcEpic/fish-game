@@ -2,6 +2,7 @@ async function end() {
 	player.alive = false;
 	context.textAlign = "center";
 	context.font = "60px Roboto";
+	context.strokeStyle = 'black';
 	if (!winner) {
 		context.fillStyle = "red";
 		context.fillText("You Lose!", canvasWidth / 2, canvasHeight / 2);

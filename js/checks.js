@@ -1,6 +1,7 @@
 function checks() {
 	if (!paint) {
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
+		context.beginPath();
 	}
 	if (wtfMode) {
 		context.fillStyle = "orangered";

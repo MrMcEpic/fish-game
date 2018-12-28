@@ -25,8 +25,8 @@ function boxBehave() {
 			l = despawn(i, enemies);
 			continue;
 		}
-		if (box.y + box.size * 0.430 >= player.y + player.size * 0.18 && box.y + box.size * 0.18 <= player.y + player.size * 0.430) { //hit detection 
-			if (box.x + box.size * 0.80 >= player.x && box.x <= player.x + player.size * 0.8) {
+		if (box.y + box.size * hitBoxOffSetYLow >= player.y + player.size * hitBoxOffSetYHigh && box.y + box.size * hitBoxOffSetYHigh <= player.y + player.size * hitBoxOffSetYLow) { //hit detection 
+			if (box.x + box.size * hitBoxOffSetXLow >= player.x + player.size * hitBoxOffSetXHigh && box.x <= player.x + player.size * hitBoxOffSetXLow) {
 				l = playerHit(box, i, enemies);
 				continue;
 			}
@@ -41,12 +41,12 @@ function boxDraw () { //this solves blinking bug
 		let box = enemies[i];
 		if (box.size < player.size) {
 			if (boxMarker) {
-				context.drawImage(box.enemyImageSecondary, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
+				context.drawImage(box.enemyImageSecondary, 0, 0, 108, 72, box.x, box.y, box.size, box.size * fishDrawOffSet);
 			} else {
-				context.drawImage(box.enemyImage, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
+				context.drawImage(box.enemyImage, 0, 0, 108, 72, box.x, box.y, box.size, box.size * fishDrawOffSet);
 			}
 		} else {
-			context.drawImage(box.enemyImage, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
+			context.drawImage(box.enemyImage, 0, 0, 108, 72, box.x, box.y, box.size, box.size * fishDrawOffSet);
 		}
 	}
 }
