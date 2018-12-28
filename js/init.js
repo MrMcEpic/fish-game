@@ -5,6 +5,7 @@ let config;
 //--CONFIG--\\
 	playerSpeedDefault = 2,
 		playerSprintDefault = 6,
+		growthDivider = 10;
 		limit = 10,
 		wtfMode = false,
 		paint = false,

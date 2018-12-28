@@ -8,7 +8,12 @@ let img = imgR;
 
 
 const limiter = () => {
-	if (player.size >= 100){
+	if (player.size >= 150) {
+		growthDivider = 20;
+		globalEnemyMaximumSize = 300;
+		globalEnemyMinimumSize = 130;
+	} else if (player.size >= 100) {
+		growthDivider = 15;
 		globalEnemyMinimumSize = 80;
 		globalEnemyMaximumSize = 250;
 	} else if (player.size >= 70) {
@@ -32,7 +37,7 @@ const maxer = () => {
 const playerHit = (box, i, arr) => {
 	if (player.size > box.size) {
 		despawn(i, arr);
-		player.size += box.size / 10;
+		player.size += box.size / growthDivider;
 		if (player.size >= 400) {
 			winner = true;
 			end();
