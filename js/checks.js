@@ -1,9 +1,10 @@
 function checks() {
 	if (!paint) {
-		c.clearRect(0, 0, cWidth, cHeight);
+		context.clearRect(0, 0, canvasWidth, canvasHeight);
+		context.beginPath();
 	}
 	if (wtfMode) {
-		c.fillStyle = "orangered";
-		c.fillRect(player.y, player.x, player.size, player.size);
+		context.fillStyle = "orangered";
+		context.fillRect(player.y, player.x, player.size, player.size);
 	}
 }
