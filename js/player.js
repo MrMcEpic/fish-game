@@ -130,9 +130,8 @@ function pMover() {
 const pDraw = () => {
 	context.strokeStyle = 'purple';
 	//context.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
-	context.arc(player.destination.X, player.destination.Y, 5, 0, Math.PI * 2);
+	context.arc(player.destination.X, player.destination.Y - player.size / 6, 10, 0, Math.PI * 2);
 	context.stroke();
-	context.fillRect(player.x - 5, player.y - 5, 10, 10);
 	context.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, player.size * fishDrawOffSet);
 };
 
