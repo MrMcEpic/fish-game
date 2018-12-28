@@ -131,6 +131,9 @@ const pDraw = () => {
 	context.fillStyle = 'purple';
 	context.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
 	context.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, player.size * 0.667);
+	context.fillRect(player.x -5 , player.y + player.size * 0.40 -5,10,10);
+	context.fillRect(player.x+player.size -5 , player.y + player.size * 0.23 -5,10 ,10 );
+
 	// c.fillStyle = "coral";
 	// c.fillRect(player.x, player.y, player.size, player.size); //draw player
 };
