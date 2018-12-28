@@ -136,6 +136,8 @@ function onMouseDown(event) {
 		lastTap = now;
 		player.destination.X = event.clientX - rect.left;
 		player.destination.Y = event.clientY - rect.top;
+	} else {
+		started = true;
 	}
 }
 

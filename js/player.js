@@ -9,17 +9,17 @@ let img = imgR;
 
 const limiter = () => {
 	if (player.size >= 100){
-		geMin = 80;
-		geMax = 250;
+		globalEnemyMinimumSize = 80;
+		globalEnemyMaximumSize = 250;
 	} else if (player.size >= 70) {
-		geMin = 40;
+		globalEnemyMinimumSize = 40;
 		limit = 15;
 	} else if (player.size >= 60) {
 		limit = 14;
-		geMax = 200;
+		globalEnemyMaximumSize = 200;
 	} else if (player.size >= 50) {
 		limit = 13;
-		geMin = 20;
+		globalEnemyMinimumSize = 20;
 	} else if (player.size >= 40) {
 		limit = 12;
 	}
@@ -29,7 +29,7 @@ const maxer = () => {
 	//pass
 };
 
-const pHit = (box, i, arr) => {
+const playerHit = (box, i, arr) => {
 	if (player.size > box.size) {
 		despawn(i, arr);
 		player.size += box.size / 10;
@@ -49,25 +49,25 @@ const sprintLogic = () => {
 		sprint = true;
 	}
 
-	if (sprintbar <= 0) {
+	if (sprintBar <= 0) {
 		player.destination.sprint = false;
 		sprint = false;
 	}
 
-	if (sprintbar < 100) {
+	if (sprintBar < 100) {
 		sprintDis = true;
-	} else if (sprintbar >= 100) {
+	} else if (sprintBar >= 100) {
 		sprintDis = false;
 	}
 
 	if (!sprint) {
-		player.speed = pSpeedDe;
-		if (sprintbar < 100) {
-			sprintbar += 0.3;
+		player.speed = playerSpeedDefault;
+		if (sprintBar < 100) {
+			sprintBar += 0.3;
 		}
 	} else if (sprint) {
-		player.speed = pSprintDe;
-		sprintbar -= 1;
+		player.speed = playerSprintDefault;
+		sprintBar -= 1;
 	}
 };
 
@@ -90,10 +90,10 @@ function mover(x) {
 }
 
 function pMover() {
-	if (keyD && player.x < cWidth - player.size) {
+	if (keyD && player.x < canvasWidth - player.size) {
 		mover('right');
 	}
-	if (keyS && player.y < cHeight - player.size * 0.668) {
+	if (keyS && player.y < canvasHeight - player.size * 0.668) {
 		mover('down');
 	}
 	if (keyA && player.x > 0) {
@@ -123,30 +123,30 @@ function pMover() {
 }
 
 const pDraw = () => {
-	c.fillStyle = 'purple';
-	c.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
-	c.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, player.size * 0.667);
+	context.fillStyle = 'purple';
+	context.fillRect(player.destination.X - 5, player.destination.Y - 5, 10, 10);
+	context.drawImage(img, 0, 0, 108, 72, player.x, player.y, player.size, player.size * 0.667);
 	// c.fillStyle = "coral";
 	// c.fillRect(player.x, player.y, player.size, player.size); //draw player
 };
 
 function mark() {
 	if (markers) {
-		c.fillStyle = "orangered";
-		c.fillRect(player.x + player.size - player.size / 10, player.y, player.size / 10, player.size);
-		c.fillRect(player.x, player.y, player.size / 10, player.size);
-		c.fillRect(player.x, player.y, player.size, player.size / 10);
-		c.fillRect(player.x, player.y + player.size - player.size / 10, player.size, player.size / 10);
+		context.fillStyle = "orangered";
+		context.fillRect(player.x + player.size - player.size / 10, player.y, player.size / 10, player.size);
+		context.fillRect(player.x, player.y, player.size / 10, player.size);
+		context.fillRect(player.x, player.y, player.size, player.size / 10);
+		context.fillRect(player.x, player.y + player.size - player.size / 10, player.size, player.size / 10);
 	}
 }
 
 function writer() {
 	let _size = `Size: ${Math.floor(player.size)}`;
-	c.textAlign = "left";
-	c.fillStyle = "Black";
-	c.font = "30px Roboto";
-	c.fillText(_size, 10, 40);
-	c.fillText(`Sprint: ${Math.floor(sprintbar)}`, 10, 70);
+	context.textAlign = "left";
+	context.fillStyle = "Black";
+	context.font = "30px Roboto";
+	context.fillText(_size, 10, 40);
+	context.fillText(`Sprint: ${Math.floor(sprintBar)}`, 10, 70);
 }
 
 const playerFunc = () => {

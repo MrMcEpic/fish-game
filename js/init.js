@@ -3,34 +3,34 @@ let config;
 	winW = window.innerWidth;
 	winY = window.innerHeight;
 //--CONFIG--\\
-	pSpeedDe = 2,
-		pSprintDe = 6,
+	playerSpeedDefault = 2,
+		playerSprintDefault = 6,
 		limit = 10,
 		wtfMode = false,
 		paint = false,
 		markers = true,
 		boxMarker = true,
-		geMin = 5,
-		geMax = 150,
-		cWidth = winW - winW / 9.45,
-		cHeight = winY - winY / 8.9,
+		globalEnemyMinimumSize = 5,
+		globalEnemyMaximumSize = 150,
+		canvasWidth = winW - winW / 9.45,
+		canvasHeight = winY - winY / 8.9,
 		keyW = false,
 		keyA = false,
 		keyS = false,
 		keyD = false,
 		sprint = false,
-		sprintbar = 100,
-		blocks = [],
+		sprintBar = 100,
+		enemies = [],
 		winner = false;
 	if (!played) {
 		started = false;
 	}
 		player = {
-			x: cWidth / 2,
-			y: cHeight / 2,
+			x: canvasWidth / 2,
+			y: canvasHeight / 2,
 			size: 30,
 			alive: true,
-			speed: pSpeedDe,
+			speed: playerSpeedDefault,
 			destination: {},
 			lastDirect: 'R'
 		};
@@ -47,10 +47,10 @@ let preinit;
 	$("#info").html(infoText);
 	canvas = document.createElement('canvas'), //create canvas
 		canvas.id = "myCanvas",
-		canvas.width = cWidth,
-		canvas.height = cHeight,
+		canvas.width = canvasWidth,
+		canvas.height = canvasHeight,
 		canvas.style.background = "aqua",
 		div = document.getElementById("canvashold"); //get canvas placeholder
 		div.appendChild(canvas); //put canvas in placeholder
-	c = document.getElementById("myCanvas").getContext("2d"); //not using var,let,const makes it global
+	context = document.getElementById("myCanvas").getContext("2d"); //not using var,let,const makes it global
 })();
