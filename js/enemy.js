@@ -21,7 +21,7 @@ function boxBehave() {
 	for (i = 0; i < l; i++) { //don't use in because length changes
 		let box = enemies[i]; // short hand
 		box.x = box.x - box.speed;
-		if (box.x > canvasWidth + 60 || box.x + box.size < 0 - (300+60)) {
+		if (box.x > canvasWidth + 60 || box.x + box.size < 0 - (globalEnemyMaximumSize+60)) {
 			l = despawn(i, enemies);
 			continue;
 		}

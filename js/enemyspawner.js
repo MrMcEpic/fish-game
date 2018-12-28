@@ -13,7 +13,7 @@ function spawner() { // create enemies
 		enemyImage = enemyImageLeft;
 		enemyImageSecondary = enemyImageLeftSecondary;
 	} else {
-		x = 0 - (300+60);
+		x = 0 - (globalEnemyMaximumSize+60);
 		speed = -zoom;
 		enemyImage = enemyImageRight;
 		enemyImageSecondary = enemyImageRightSecondary;
