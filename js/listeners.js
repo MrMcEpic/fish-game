@@ -64,6 +64,9 @@ function onKeyDown(event) {
 
 function onKeyUp(event) {
 	switch (event.which) {
+		case 49:
+			started = true;
+			break;
 		case 39:
 		case 68: //d
 			keyD = false;
@@ -91,7 +94,7 @@ function onKeyUp(event) {
 			break;
 		case 82: //r
 			if (!player.alive) {
-				config();
+				config(played=true);
 				loadOrder();
 			}
 			break;
