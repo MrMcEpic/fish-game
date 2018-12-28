@@ -36,9 +36,7 @@ function boxBehave() {
 }
 
 function boxDraw () { //this solves blinking bug
-	let i;
-	for (i in enemies) {
-		let box = enemies[i];
+	for (let box of enemies) {
 		if (box.size < player.size) {
 			if (boxMarker) {
 				context.drawImage(box.enemyImageSecondary, 0, 0, 108, 72, box.x, box.y, box.size, box.size * fishDrawOffSet);

@@ -46,7 +46,7 @@ function onKeyDown(event) {
 		player.destination = {};//stop click movement if using keys
 	}
 	switch (event.which) {
-		case 39:
+		case 39://intended fallthroughs here
 		case 68:
 			keyD = true;
 			break;

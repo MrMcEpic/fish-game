@@ -1,11 +1,10 @@
 function spawner() { // create enemies
-	const picker = () => Math.random() >= 0.4999999 ? -1 : 1;
 	let x,
 		enemyImage,
 		enemyImageSecondary,
 		size = randRange(globalEnemyMinimumSize, globalEnemyMaximumSize, true),
 		y = Math.abs(randRange(0, canvasHeight - size, false)),
-		side = picker();
+		side = Math.random() >= 0.4999999 ? -1 : 1;
 		speed = side * randRange(0.5, 4.0, false);
 	if (side === 1) {
 		x = canvasWidth + 60;
