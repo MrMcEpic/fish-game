@@ -25,7 +25,7 @@ function boxBehave() {
 			l = despawn(i, enemies);
 			continue;
 		}
-		if (box.y + box.size * 0.40 >= player.y + player.size * 0.23 && box.y + box.size * 0.23 <= player.y + player.size * 0.40) { //hit detection 
+		if (box.y + box.size * 0.430 >= player.y + player.size * 0.18 && box.y + box.size * 0.18 <= player.y + player.size * 0.430) { //hit detection 
 			if (box.x + box.size * 0.80 >= player.x && box.x <= player.x + player.size * 0.8) {
 				l = playerHit(box, i, enemies);
 				continue;
@@ -43,25 +43,25 @@ function boxDraw () { //this solves blinking bug
 			if (boxMarker) {
 				context.drawImage(box.enemyImageSecondary, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
 				context.fillStyle = 'purple';
-		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.4 - 5,10,10);
-		context.fillRect(box.x - 5, box.y + box.size * 0.23 - 5, 10, 10);
-		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.23 - 5 ,10,10);
-		context.fillRect(box.x-5, box.y + box.size * 0.4 - 5,10,10);
+		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.43 - 5,10,10);
+		context.fillRect(box.x - 5, box.y + box.size * 0.18 - 5, 10, 10);
+		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.18 - 5 ,10,10);
+		context.fillRect(box.x-5, box.y + box.size * 0.43 - 5,10,10);
 			} else {
 				context.drawImage(box.enemyImage, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
 				context.fillStyle = 'red';
-		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.4 - 5,10,10);
-		context.fillRect(box.x - 5, box.y + box.size * 0.23 - 5, 10, 10);
-		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.23 - 5 ,10,10);
-		context.fillRect(box.x-5, box.y + box.size * 0.4 - 5,10,10);
+		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.43 - 5,10,10);
+		context.fillRect(box.x - 5, box.y + box.size * 0.18 - 5, 10, 10);
+		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.18 - 5 ,10,10);
+		context.fillRect(box.x-5, box.y + box.size * 0.43 - 5,10,10);
 			}
 		} else {
 			context.drawImage(box.enemyImage, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
 			context.fillStyle = 'red';
-		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.4 - 5,10,10);
-		context.fillRect(box.x - 5, box.y + box.size * 0.23 - 5, 10, 10);
-		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.23 - 5 ,10,10);
-		context.fillRect(box.x-5, box.y + box.size * 0.4 - 5,10,10);
+		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.43 - 5,10,10);
+		context.fillRect(box.x - 5, box.y + box.size * 0.18 - 5, 10, 10);
+		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.18 - 5 ,10,10);
+		context.fillRect(box.x-5, box.y + box.size * 0.43 - 5,10,10);
 		}
 	}
 }
