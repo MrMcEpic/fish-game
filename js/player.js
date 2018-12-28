@@ -1,8 +1,8 @@
 let imgR = new Image();
-imgR.src = './fishR.png';
+imgR.src = './sprites/fishR.png';
 
 let imgL = new Image();
-imgL.src = './fishL.png';
+imgL.src = './sprites/fishL.png';
 
 let img = imgR;
 

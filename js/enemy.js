@@ -1,14 +1,14 @@
 let eimgR = new Image();
-eimgR.src = './efishR.png';
+eimgR.src = './sprites/efishR.png';
 
 let eimgL = new Image();
-eimgL.src = './efishL.png';
+eimgL.src = './sprites/efishL.png';
 
 let eimgRS = new Image();
-eimgRS.src = './efishRY.png';
+eimgRS.src = './sprites/efishRY.png';
 
 let eimgLS = new Image();
-eimgLS.src = './efishLY.png';
+eimgLS.src = './sprites/efishLY.png';
 
 const despawn = (i, arr) => {//deletes enemy object from list of enemies and returns list length back
 	arr.splice(i, 1);
