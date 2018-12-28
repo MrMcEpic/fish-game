@@ -14,24 +14,28 @@ document.addEventListener("DOMContentLoaded", domloaded, false);
 let lastTap;
 function touchHandler(event) {
 	event.preventDefault();
-	if (!player.alive) {
-		config();
-		loadOrder();
-	}
-	let rect = canvas.getBoundingClientRect();
-	let now = new Date().getTime();
-	let timeSince = now - lastTap;
-	if (timeSince < 300 && timeSince > 0) {
-		if (!sprintDis) {
-			player.destination.sprint = true;
-		} else {
-			player.destination.sprint = false;
-			sprint = false;
+	if (started) {
+		if (!player.alive) {
+			config();
+			loadOrder();
 		}
+		let rect = canvas.getBoundingClientRect();
+		let now = new Date().getTime();
+		let timeSince = now - lastTap;
+		if (timeSince < 300 && timeSince > 0) {
+			if (!sprintDis) {
+				player.destination.sprint = true;
+			} else {
+				player.destination.sprint = false;
+				sprint = false;
+			}
+		}
+		lastTap = now;
+		player.destination.X = event.touches[0].clientX - rect.left;
+		player.destination.Y = event.touches[0].clientY - rect.top;
+	} else {
+		started = true;
 	}
-	lastTap = now;
-	player.destination.X = event.touches[0].clientX-rect.left;
-	player.destination.Y = event.touches[0].clientY - rect.top;
 }
 
 function onKeyDown(event) {
@@ -117,20 +121,22 @@ function onKeyUp(event) {
 
 function onMouseDown(event) {
 	event.preventDefault();
-	let rect = canvas.getBoundingClientRect();
-	let now = new Date().getTime();
-	let timeSince = now - lastTap;
-	if (timeSince < 300 && timeSince > 0) {
-		if (!sprintDis) {
-			player.destination.sprint = true;
-		} else {
-			player.destination.sprint = false;
-			sprint = false;
+	if (started) {
+		let rect = canvas.getBoundingClientRect();
+		let now = new Date().getTime();
+		let timeSince = now - lastTap;
+		if (timeSince < 300 && timeSince > 0) {
+			if (!sprintDis) {
+				player.destination.sprint = true;
+			} else {
+				player.destination.sprint = false;
+				sprint = false;
+			}
 		}
+		lastTap = now;
+		player.destination.X = event.clientX - rect.left;
+		player.destination.Y = event.clientY - rect.top;
 	}
-	lastTap = now;
-	player.destination.X = event.clientX-rect.left;
-	player.destination.Y = event.clientY-rect.top;
 }
 
 function domloaded() { //once canvas is loaded, start animation
@@ -152,6 +158,7 @@ function domloaded() { //once canvas is loaded, start animation
 	<li><s>dynamic rez</s></li>\
 	<li>different fish types</li>\
 	<li>(Basic) <s>mobile controls</s></li>\
+	<li>Angled fish for hard mode</li>\
 	</ul>";
 	if (mobilecheck()) {
 		window.scroll(0, winY / 10);

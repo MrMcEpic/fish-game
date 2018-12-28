@@ -97,7 +97,7 @@ function pMover() {
 		mover('up');
 	}
 	//\\
-	if (!jQuery.isEmptyObject(player.destination)) {
+	if (!jQuery.isEmptyObject(player.destination)) {//touch/click controls
 		if (Math.abs(player.destination.X - (player.x + player.size / 2)) > 5 || Math.abs(player.destination.Y - (player.y + player.size / 2)) > 5) {
 			if (player.destination.X - player.size / 2 > player.x + 3) { // move right
 				mover('right');

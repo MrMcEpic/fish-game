@@ -39,7 +39,7 @@ async function waiter() {
 	c.textAlign = "center";
 	c.fillStyle = 'black';
 	c.font = '40px Roboto';
-	c.fillText('Press 1 to start with normal difficulty', cWidth / 2, cHeight / 2);
+	c.fillText('Press 1 or tap to start with normal difficulty', cWidth / 2, cHeight / 2);
 	await starter;
 }
 
