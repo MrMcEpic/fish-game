@@ -8,13 +8,19 @@ let img = imgR;
 
 
 const limiter = () => {
-	if (player.size >= 70 && limit <= 15) {
+	if (player.size >= 100){
+		geMin = 80;
+		geMax = 250;
+	} else if (player.size >= 70) {
+		geMin = 40;
 		limit = 15;
-	} else if (player.size >= 60 && limit < 14) {
+	} else if (player.size >= 60) {
 		limit = 14;
-	} else if (player.size >= 50 && limit < 13) {
+		geMax = 200;
+	} else if (player.size >= 50) {
 		limit = 13;
-	} else if (player.size >= 40 && limit < 12) {
+		geMin = 20;
+	} else if (player.size >= 40) {
 		limit = 12;
 	}
 };
@@ -87,7 +93,7 @@ function pMover() {
 	if (keyD && player.x < cWidth - player.size) {
 		mover('right');
 	}
-	if (keyS && player.y < cHeight - player.size) {
+	if (keyS && player.y < cHeight - player.size * 0.668) {
 		mover('down');
 	}
 	if (keyA && player.x > 0) {

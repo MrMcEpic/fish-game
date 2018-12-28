@@ -1,6 +1,7 @@
 function spawner() { // create enemies
 	let x,
 		eimg,
+		eimgS,
 		speed,
 		size = randRange(geMin, geMax, true),
 		y = Math.abs(randRange(0, cHeight - size, false)),
