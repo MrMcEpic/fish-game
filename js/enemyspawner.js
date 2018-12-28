@@ -8,12 +8,12 @@ function spawner() { // create enemies
 		side = Math.random(),
 		zoom = randRange(0.5, 4.0, false);
 	if (side >= 0.499999) {
-		x = canvasWidth + 70;
+		x = canvasWidth + 60;
 		speed = zoom;
 		enemyImage = enemyImageLeft;
 		enemyImageSecondary = enemyImageLeftSecondary;
 	} else {
-		x = 0 - 160;
+		x = 0 - (300+60);
 		speed = -zoom;
 		enemyImage = enemyImageRight;
 		enemyImageSecondary = enemyImageRightSecondary;

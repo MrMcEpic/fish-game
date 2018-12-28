@@ -21,7 +21,7 @@ function boxBehave() {
 	for (i = 0; i < l; i++) { //don't use in because length changes
 		let box = enemies[i]; // short hand
 		box.x = box.x - box.speed;
-		if (box.x > canvasWidth + 80 || box.x + box.size < 0 - 160) {
+		if (box.x > canvasWidth + 60 || box.x + box.size < 0 - (300+60)) {
 			l = despawn(i, enemies);
 			continue;
 		}
@@ -42,26 +42,11 @@ function boxDraw () { //this solves blinking bug
 		if (box.size < player.size) {
 			if (boxMarker) {
 				context.drawImage(box.enemyImageSecondary, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
-				context.fillStyle = 'purple';
-		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.43 - 5,10,10);
-		context.fillRect(box.x - 5, box.y + box.size * 0.18 - 5, 10, 10);
-		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.18 - 5 ,10,10);
-		context.fillRect(box.x-5, box.y + box.size * 0.43 - 5,10,10);
 			} else {
 				context.drawImage(box.enemyImage, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
-				context.fillStyle = 'red';
-		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.43 - 5,10,10);
-		context.fillRect(box.x - 5, box.y + box.size * 0.18 - 5, 10, 10);
-		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.18 - 5 ,10,10);
-		context.fillRect(box.x-5, box.y + box.size * 0.43 - 5,10,10);
 			}
 		} else {
 			context.drawImage(box.enemyImage, 0, 0, 108, 72, box.x, box.y, box.size, box.size * 0.667);
-			context.fillStyle = 'red';
-		context.fillRect(box.x + box.size * 0.8-5, box.y + box.size * 0.43 - 5,10,10);
-		context.fillRect(box.x - 5, box.y + box.size * 0.18 - 5, 10, 10);
-		context.fillRect(box.x + box.size * 0.8-5,box.y + box.size * 0.18 - 5 ,10,10);
-		context.fillRect(box.x-5, box.y + box.size * 0.43 - 5,10,10);
 		}
 	}
 }
