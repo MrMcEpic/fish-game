@@ -30,10 +30,6 @@ const limiter = () => {
 	}
 };
 
-const maxer = () => {
-	//pass
-};
-
 const playerHit = (box, i, arr) => {
 	if (player.size > box.size) {
 		despawn(i, arr);
@@ -145,8 +141,8 @@ function writer() {
 }
 
 const playerFunc = () => {
-	pDraw();
 	sprintLogic();
 	pMover();
 	writer();
+	pDraw();
 };
