@@ -6,7 +6,7 @@ let config;
 	hitBoxOffSetYLow = 0.43,
 		hitBoxOffSetYHigh = 0.18,
 		hitBoxOffSetXLow = 0.80,
-		hitBoxOffSetXHigh = 0,
+		hitBoxOffSetXHigh = -0.3,
 		fishDrawOffSet = 0.667,
 		playerSpeedDefault = 2,
 		playerSprintDefault = 6,
@@ -44,7 +44,7 @@ let config;
 let preinit;
 (preinit = () => { //function autocalls itself
 	let infoText = "<p>WASD, arrow keys or tap to move, Shift or double tap to dash (double tap to cancel), H for wtfmode, P to paint</p>";
-	var requestAnimationFrame = window.requestAnimationFrame ||
+	let requestAnimationFrame = window.requestAnimationFrame ||
 		window.mozRequestAnimationFrame ||
 		window.webkitRequestAnimationFrame ||
 		window.msRequestAnimationFrame;
@@ -55,7 +55,7 @@ let preinit;
 		canvas.width = canvasWidth,
 		canvas.height = canvasHeight,
 		canvas.style.background = "aqua",
-		div = document.getElementById("canvashold"); //get canvas placeholder
-		div.appendChild(canvas); //put canvas in placeholder
+		div = $('#canvashold'); //get canvas placeholder
+		div.append(canvas); //put canvas in placeholder
 	context = document.getElementById("myCanvas").getContext("2d"); //not using var,let,const makes it global
 })();

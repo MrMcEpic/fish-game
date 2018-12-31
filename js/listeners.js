@@ -143,8 +143,8 @@ function onMouseDown(event) {
 
 function domloaded() { //once canvas is loaded, start animation
 	drawStuff();
-	document.getElementById("goals").innerHTML = 
-	"Goals:\
+	$('#goals').html(
+		"Goals:\
 	<ul class='nobul ull'>\
 	<li><s>random fish location</s></li>\
 	<li><s>x hit detection</s></li>\
@@ -161,7 +161,8 @@ function domloaded() { //once canvas is loaded, start animation
 	<li>different fish types</li>\
 	<li>(Basic) <s>mobile controls</s></li>\
 	<li>Angled fish for hard mode</li>\
-	</ul>";
+	</ul>"
+	);
 	if (mobilecheck()) {
 		window.scroll(0, winY / 10);
 	} else {
