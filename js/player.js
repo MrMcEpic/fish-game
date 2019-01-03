@@ -37,8 +37,9 @@ const playerHit = (box, i, arr) => {
 		if (player.size >= 400) {
 			winner = true;
 			end();
+		} else {
+			limiter();
 		}
-		limiter();
 	} else {
 		end();
 	}
